@@ -311,3 +311,14 @@ body {
   background-color: rgba(179, 131, 131, 0.589) !important;
   color: #fff;
 }
+
+#board{
+  background-color: rgb(43, 43, 43);
+  display:block;
+  margin:0 auto;
+  position: sticky;
+
+}
+.morris-hover-point{
+  display: inline;
+}

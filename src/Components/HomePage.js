@@ -1,5 +1,5 @@
 "use strict"
-
+import creatBorad, { createBoard } from "./Dashboard.js";
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 
@@ -59,7 +59,7 @@ const HomePage = () => {
    `;
    page.innerHTML=homepage;
     channelList();
-
+  creatBorad();
 };
 
 const channelList = ()=>{
