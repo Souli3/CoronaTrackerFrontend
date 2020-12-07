@@ -55,6 +55,8 @@ const Navbar = () => {
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item"  >Mon Compte</a>
+            <a class="nav-item nav-link" href="#">DeleteAccount</a>
+
             <a class="dropdown-item" >Mes states</a>
           </div>
         </li>
