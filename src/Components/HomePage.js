@@ -9,12 +9,61 @@ import { API_URL } from "../utils/server";
 var etat=false;
 const HomePage = () => {    
   console.log("homepage");
+  let homepage=`
   
+      
+  
+      <main role="main" class="container p-5">
+        <div class="d-flex p-5 bg-purple rounded align-items-center">
+          <form class="form-inline  col-12">
+            <input class="form-control col-8" type="text" placeholder="Entrez votre recherche" aria-label="Search">
+  
+  
+            <div class="p-2">
+              
+              <select class="custom-select" id="validationCustom04" required>
+                <option selected disabled value="">Bruxelles</option>
+                <option>Bruxelles</option>
+                <option>Anvers</option>
+                <option>Liege</option>
+                <option>Mons</option>
+                <option>Namur</option>
+                <option>Gand</option>
+              </select>
+              <div class="invalid-feedback">
+                Please select a valid state.
+              </div>
+            </div>
+  
+  
+  
+            <button id="rechercher" class="btn btn-outline-success " type="submit">Rechercher</button>
+          </form>
+        </div>
+  
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+          <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+          <h1> tableau de statistique a mettre ici</h1>
+        </div>
+  
+        
+        <div id="tableau"></div>
+          
+            
+              
+            
+      </main>
+    
+  
+  </html>
+   `;
+   page.innerHTML=homepage;
     channelList();
 
 };
 
 const channelList = ()=>{
+  
   setLayout("Home page");
 
     fetch(API_URL+"channel", {
@@ -38,7 +87,7 @@ const channelList = ()=>{
 
 
 const channelListTable = (data) => {
-  console.log("data il hier");
+  console.log("data is here");
   if(!data) return;
   console.log(etat);
   let tableau;
@@ -119,6 +168,7 @@ const channelListTable = (data) => {
       </table>
       </div>
   `;
+  
  document.querySelector("#tableau").innerHTML=tableau;
 
 

@@ -6,29 +6,49 @@ import { RedirectUrl } from "./Router.js";
 import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
 
-let loginPage = `<form>
-<div class="form-group">
-  <label for="email">Email</label>
-  <input class="form-control" id="email" type="text" name="email" placeholder="Enter your email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$" />
-</div>
-<div class="form-group">
-  <label for="password">Password</label>
-  <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
-</div>
-<button class="btn btn-primary" id="btn" type="submit">Submit</button>
-<!-- Create an alert component with bootstrap that is not displayed by default-->
-<div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
-</form>`;
+let loginPage = `
+<div class="sidenav">
+         <div class="login-main-text">
+            <h1>CoronaTracker</h1><br><br>
+            <h2>Login Page</h2>
+            <p>Veuillez vous connecter ou vous inscrire pour acceder au site.</p><br><br><br><br><br><br><br>
+            <p><i>Ce site est un type de forum utilise pour traquer les cas de covid en Belgique...</i><p>
+            
+            
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+            <div class="login-form">
+               <form>
+                  <div class="form-group">
+                     <label>Email</label>
+                      <input class="form-control" id="email" type="text" name="email" placeholder="Enter your email" required="" pattern="^\\w+([.-]?\\w+)*@\\w+([\.-]?\\w+)*(\\.\\w{2,4})+\$" />
+                  </div>
+                  <div class="form-group">
+                     <label>Password</label>
+                     <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
+                  </div>
+                  <button type="submit" id="login" class="btn btn-secondary">Login</button>
+                  <button type="submit" id="register" class="btn btn-black">Register</button>
+                  <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
+               </form>
+            </div>
+        </div>
+
+      </div>`;
 
 const LoginPage = () => {
   let page = document.querySelector("#page");
+  
   page.innerHTML = loginPage;
+
   let loginForm = document.querySelector("form");
   const user = getUserSessionData();
   if (user) {
     // re-render the navbar for the authenticated user
     Navbar();
-    RedirectUrl("/list");
+    RedirectUrl("/");
   } else loginForm.addEventListener("submit", onLogin);
 };
 
@@ -66,7 +86,7 @@ const onUserLogin = (userData) => {
   setUserSessionData(user);
   // re-render the navbar for the authenticated user
   Navbar();
-  RedirectUrl("/list");
+  RedirectUrl("/");
 };
 
 const onError = (err) => {
