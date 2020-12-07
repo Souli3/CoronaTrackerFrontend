@@ -30,9 +30,10 @@ let loginPage = `
                      <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
                   </div>
                   <button type="submit" id="login" class="btn btn-secondary">Login</button>
-                  <button type="submit" id="register" class="btn btn-black">Register</button>
+                 
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
                </form>
+               <button type="submit" id="register" class="btn btn-black">Register</button>
             </div>
         </div>
 
