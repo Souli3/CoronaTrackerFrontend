@@ -43,7 +43,8 @@ const HomePage = () => {
   
         <div class="my-3 p-3 bg-white rounded box-shadow">
           <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          <h1> tableau de statistique a mettre ici</h1>
+          
+          <div id="board"></div>
         </div>
   
         

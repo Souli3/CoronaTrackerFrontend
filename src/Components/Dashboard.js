@@ -10,25 +10,15 @@ console.log("GET data");
     }}).then(response => response.json())
   .then(data => {data.board/* .records */.map(element => {cont.push({province: `${/* element.fields.province */element.province}`,'À l hôpital' :(/* element.fields .nr_reporting*/element["hôpital"]),'Cas Confirme' :(/* element.fields.new_in */element["CasConfirme"]),'Rétabli' :(/* element.fields. new_out*/element["Rétabli"])}) })
   make(cont)
-  console.log(cont)
-  afficheDate(data.records.pop().record_timestamp.substr(0, 10))  
+
 })
-function afficheDate(d){
-    let date=document.createElement('h4');
-    date.id='date';
-  date.innerText=d;
-  if(document.getElementById('board'))
-  document.getElementById('board').appendChild(date);
-}
+
 function make(cont){
- let  board=document.createElement('div');
- board.id='board';
+ let  board=document.getElementById("board");
  board.style.width = "1300px";
   board.style.height= "300px";
   board.style.border="1px solid";
-  console.log(document.querySelector('#page'));
   
-  document.querySelector('#page').appendChild(board);
   new Morris.Bar({
     // ID of the element in which to draw the chart.//
     element: 'board',
