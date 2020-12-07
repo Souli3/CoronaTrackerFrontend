@@ -1,9 +1,10 @@
-import HomePage from "./HomePage.js";
+
 import UserListPage from "./UserListPage.js";
 import LoginPage from "./LoginPage.js";
 import RegisterPage from "./RegisterPage.js";
 import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
+import HomePage from "./HomePage.js";
 
 const routes = {
   "/": HomePage,
@@ -14,7 +15,6 @@ const routes = {
   "/error": ErrorPage,
 };
 
-let page = document.querySelector("#page");
 let navBar = document.querySelector("#navBar");
 let componentToRender;
 
@@ -36,21 +36,11 @@ const Router = () => {
     let uri;
     if (e.target.tagName === "A") {
       e.preventDefault();
-      if (e.target.text === "Home" || e.target.text === "MyCMS") {
-        uri = "/";
-      } else {
-        uri = "/" + e.target.text.toLowerCase();
-      }
+      // To get a data attribute through the dataset object, get the property by the part of the attribute name after data- (note that dashes are converted to camelCase).
+      uri = e.target.dataset.uri;
     }
     if (uri) {
-      console.log(
-        "onNavigate() uri:",
-        uri,
-        " location:",
-        window.location.pathname,
-        " origin :",
-        window.location.origin
-      );
+     
       // use Web History API to add current page URL to the user's navigation history & set right URL in the browser (instead of "#")
       window.history.pushState({}, uri, window.location.origin + uri);
       // render the requested component

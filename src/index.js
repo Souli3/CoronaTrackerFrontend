@@ -13,8 +13,19 @@ const HEADER_TITLE = "JavaScript & Node.js full course";
 const PAGE_TITLE = "Demo : use of webpack as a module bundler";
 const FOOTER_TEXT = "Happy learning : )";
 
+//document.querySelector("page").innerHTML="hah";
+//document.getElementById("page").innerText="fsdqfs";
+
+console.log("rezoiarhzpeohfpqsodifhpodsqhfposhfpioshopfhspodqhf");
+
+
+
 Navbar();
 
 Router();
+
+
+
+
 
 setLayout(HEADER_TITLE, PAGE_TITLE, FOOTER_TEXT);

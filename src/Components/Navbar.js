@@ -5,49 +5,71 @@ const Navbar = () => {
   let navbar;
   let user = getUserSessionData();    
   if (user) {
-    navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
-  <a class="navbar-brand" href="/">MyCMS</a
-  ><button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Home</a>    
-      <a class="nav-item nav-link" href="#">List</a>
-      <a class="nav-item nav-link" href="#">Logout</a>
-      <a class="nav-item nav-link disabled" href="#">${user.username}</a>
+    navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" 
+    >Corona Tracker</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" 
+          >Accueil <span class="sr-only">(current)</span></a>
+        </li>
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" 
+            >Mon Compte</a>
+            <a class="dropdown-item" 
+            >Mes states</a>
+            <a class="dropdown-item" 
+            >?</a>
+          </div>
+        </li>
+      </ul>
+     
+      
     </div>
-  </div>
   </nav>`;
-  } else {
-    navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
-  <a class="navbar-brand" href="/">MyCMS</a
-  ><button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Home</a>
-      <a class="nav-item nav-link" href="#">Register</a>
-      <a class="nav-item nav-link" href="#">Login</a> 
+  } else {//pas connecter 2 eme cas en bas
+    navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" 
+    >Corona Tracker</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" data-uri="/">Accueil <span class="sr-only"></span></a>
+        </li>
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item"  >Mon Compte</a>
+            <a class="nav-item nav-link" href="#">DeleteAccount</a>
+
+            <a class="dropdown-item" >Mes states</a>
+          </div>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link"  data-uri="/login">Login <span class="sr-only"></span></a>
+      </li>
+      </ul>
+      <li class="nav-item active">
+      <a class="nav-link"  
+      >Login <span class="sr-only"></span></a>
+    </li>
+      
     </div>
-  </div>
   </nav>`;
   }
 
