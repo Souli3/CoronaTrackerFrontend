@@ -5,49 +5,56 @@ const Navbar = () => {
   let navbar;
   let user = getUserSessionData();    
   if (user) {
-    navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
-  <a class="navbar-brand" href="/">MyCMS</a
-  ><button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Home</a>    
-      <a class="nav-item nav-link" href="#">List</a>
-      <a class="nav-item nav-link" href="#">Logout</a>
-      <a class="nav-item nav-link disabled" href="#">${user.username}</a>
+    navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Corona Tracker</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+        </li>
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametreee</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Mon Compte</a>
+            <a class="dropdown-item" href="#">Mes states</a>
+            <a class="dropdown-item" href="#">?</a>
+          </div>
+        </li>
+      </ul>
+      
     </div>
-  </div>
   </nav>`;
-  } else {
-    navbar = `<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2" id="navBar">
-  <a class="navbar-brand" href="/">MyCMS</a
-  ><button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link" href="#">Home</a>
-      <a class="nav-item nav-link" href="#">Register</a>
-      <a class="nav-item nav-link" href="#">Login</a> 
+  } else {//pas connecter 2 eme cas en bas
+    navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Corona Tracker</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" data-uri="/" href="#">Accueil <span class="sr-only"></span></a>
+        </li>
+        
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametrees</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item"  href="#">Mon Compte</a>
+            <a class="dropdown-item" href="#">Mes states</a>
+            <a class="dropdown-item" href="#">?</a>
+          </div>
+        </li>
+      </ul>
+      
     </div>
-  </div>
   </nav>`;
   }
 
