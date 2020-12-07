@@ -35,7 +35,7 @@ let registerPage = `<form>
 </form>`;
 
 const RegisterPage = () => {
-  let page = document.querySelector("#page");
+  let page = document.getElementById("page");
   page.innerHTML = registerPage;
   let registerForm = document.querySelector("form");
   registerForm.addEventListener("submit", onRegister);

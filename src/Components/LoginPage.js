@@ -30,9 +30,10 @@ let loginPage = `
                      <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
                   </div>
                   <button type="submit" id="login" class="btn btn-secondary">Login</button>
-                  <button type="submit" id="register" class="btn btn-black">Register</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
                </form>
+               <button type="submit" id="register" class="btn btn-black">Register</button>
+
             </div>
         </div>
 
@@ -44,6 +45,8 @@ const LoginPage = () => {
   page.innerHTML = loginPage;
 
   let loginForm = document.querySelector("form");
+  let registerForm = document.getElementById("register");
+  registerForm.addEventListener("click", onRegister);
   const user = getUserSessionData();
   if (user) {
     // re-render the navbar for the authenticated user
@@ -51,6 +54,10 @@ const LoginPage = () => {
     RedirectUrl("/");
   } else loginForm.addEventListener("submit", onLogin);
 };
+const onRegister =(e) =>{
+  RedirectUrl("/register");
+
+  }
 
 const onLogin = (e) => {
   e.preventDefault();
