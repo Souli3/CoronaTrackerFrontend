@@ -15,9 +15,9 @@ console.log("GET data");
 
 function make(cont){
  let  board=document.getElementById("board");
- board.style.width = "1300px";
+ board.style.width = "1200px";
   board.style.height= "300px";
-  board.style.border="1px solid";
+  board.style.border="2px solid";
   
   new Morris.Bar({
     // ID of the element in which to draw the chart.//

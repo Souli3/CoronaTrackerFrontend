@@ -298,8 +298,7 @@ body {
 
 #board{
   background-color: rgb(43, 43, 43);
-  display:block;
-  margin:0 auto;
+  
   position: sticky;
 
 }
