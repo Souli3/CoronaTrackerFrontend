@@ -7,7 +7,20 @@ import { API_URL } from "../utils/server.js";
 /* In a template literal, the ` (backtick), \ (backslash), and $ (dollar sign) characters should be 
 escaped using the escape character \ if they are to be included in their template value. 
 By default, all escape sequences in a template literal are ignored.*/
-let registerPage = `<form>
+let registerPage = `
+<div class="sidenav">
+         <div class="login-main-text">
+            <h1>CoronaTracker</h1><br><br>
+            <h2>Bienvenue</h2>
+            <p> Veuillez  vous inscrire pour acceder au site.</p><br><br><br><br><br><br><br>
+            <p><i>Ce site est un type de forum utilise pour traquer les cas de covid en Belgique...</i><p>
+            
+            
+         </div>
+      </div>
+<div class="main">
+         <div class="col-md-6 col-sm-12">
+<div class="register-form"><form>
 <div class="form-group">
   <label for="firstName">Prénom</label>
   <input class="form-control" id="fname" type="text" name="fname" placeholder="Entrez votre Prénom " required="" pattern="^([a-zA-Z]|\s)*$"
@@ -32,7 +45,11 @@ let registerPage = `<form>
 <button class="btn btn-primary" id="btn" type="submit">Submit</button>
 <!-- Create an alert component with bootstrap that is not displayed by default-->
 <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div><span id="errorMessage"></span>
-</form>`;
+</form>
+     </div>
+  </div>
+
+  </div>`;
 
 const RegisterPage = () => {
   let page = document.getElementById("page");

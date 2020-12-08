@@ -32,9 +32,7 @@ let loginPage = `
                   <button type="submit" id="login" class="btn btn-secondary">Login</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
                </form>
-               <button type="submit" id="register" class="btn btn-black">Register</button>
-
->>>>>>> 1536cdc6a6df21deb3760d0aca00b3651d46dbee
+               <button type="button" id="register" class="btn btn-black"  >Register</button>
             </div>
         </div>
 
@@ -47,7 +45,7 @@ const LoginPage = () => {
 
   let loginForm = document.querySelector("form");
   let registerForm = document.getElementById("register");
-  registerForm.addEventListener("click", onRegister);
+ registerForm.addEventListener("click", onRegister);
   const user = getUserSessionData();
   if (user) {
     // re-render the navbar for the authenticated user
@@ -56,6 +54,7 @@ const LoginPage = () => {
   } else loginForm.addEventListener("submit", onLogin);
 };
 const onRegister =(e) =>{
+  Navbar();
   RedirectUrl("/register");
 
   }
