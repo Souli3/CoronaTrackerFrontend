@@ -15,20 +15,6 @@ input:invalid {
 input:valid {
   border: 2px solid green;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 body{margin-top:20px;
   background:#eee;
   }
@@ -156,10 +142,8 @@ body{margin-top:20px;
       float: none !important;
     }
   }
-  
-  
-  
-  
+
+
   
   .ibox {
     clear: both;

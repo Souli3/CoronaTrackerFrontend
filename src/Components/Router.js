@@ -5,6 +5,8 @@ import RegisterPage from "./RegisterPage.js";
 import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import HomePage from "./HomePage.js";
+import deleteAccount from "./DeleteAccount.js";
+
 
 const routes = {
   "/": HomePage,
@@ -13,6 +15,8 @@ const routes = {
   "/register": RegisterPage,
   "/logout": LogoutComponent,
   "/error": ErrorPage,
+  "/deleteaccount": deleteAccount,
+
 };
 
 let navBar = document.querySelector("#navBar");
