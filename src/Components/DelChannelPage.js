@@ -4,16 +4,11 @@ import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
 
-//import {ChannelList} from "./Channel/ChannelList.js";
-//import { RedirectUrl } from "./Router.js";
-//import Channel from "./Channel/ChannelList";
 var etat = false;
-const HomePage = () => {
-  console.log("homepage");
-  let homepage = `
-  
-      
-  
+const DelChannelPage = () => {
+  console.log("DelChannelPage");
+  let deletepage = `
+
       <main role="main" class="container p-5">
         <div class="d-flex p-5 bg-purple rounded align-items-center">
           <form class="form-inline  col-12">
@@ -35,40 +30,31 @@ const HomePage = () => {
                 Please select a valid state.
               </div>
             </div>
-  
-  
-  
+
             <button id="rechercher" class="btn btn-outline-success " type="submit">Rechercher</button>
           </form>
         </div>
-  
-        <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          <h1> tableau de statistique a mettre ici</h1>
-        </div>
-  
-        
+
         <div id="tableau"></div>
-          
-            
-              
-            
+
       </main>
     
-  
   </html>
    `;
-  page.innerHTML = homepage;
+  page.innerHTML = deletepage;
   channelList();
 
 };
 
 const channelList = () => {
 
-  setLayout("Home page");
+  setLayout("DelChannelPage");
 
-  fetch(API_URL + "channel", {
-    method: "POST",
+  const user = getUserSessionData();
+
+  fetch(API_URL + "channel/mychannels", {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify(user), // body data type must match "Content-Type" header
     headers: {
       "Content-Type": "application/json",
     },
@@ -78,16 +64,14 @@ const channelList = () => {
         throw new Error(
           "Error code : " + response.status + " : " + response.statusText
         );
-      return response.json();
+      return response.json(); 
     })
     .then((data) => channelListTable(data.tableau))
     .catch((err) => onError(err));
 
-
 };
 
 const channelListTable = (data) => {
-  console.log("data is here"+data);
   if (!data) return;
   console.log(etat);
   let tableau;
@@ -95,23 +79,19 @@ const channelListTable = (data) => {
   if (etat) {
     tableau = `
     <div class="my-3 p-3 bg-white rounded box-shadow">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
     <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
       <label class="btn  btn-primary col-6 active">
         <input type="radio" name="options" id="option1" autocomplete="off" checked data-uri="/">Channel ouvert</label>
       <label class="btn  btn-secondary  col-6">
         <input type="radio" name="options" id="option2" autocomplete="off" data-uri="/fermé">Channel fermé</label>
     </div>
-
-  
-  
-  
   
   `;
   } else {
     tableau = `
       <div class="my-3 p-3 bg-white rounded box-shadow">
-      <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
+      <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
         <label class="btn  btn-secondary  col-6 active">
           <input type="radio" name="options" id="option1" autocomplete="off" >Channel ouvert</label>
@@ -161,10 +141,9 @@ const channelListTable = (data) => {
           <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
     </tr> `;
     }
-  
   });
 
- 
+
 
 
   tableau += ` </tbody>
@@ -177,14 +156,9 @@ const channelListTable = (data) => {
 
 
   const deleteBtns = document.querySelectorAll(".delete");
-  /*let btndelete=  document.getElementById("delete");
-  btndelete.onclick = function(){
-    console.log("deteeeeeeeeeeeeeeeeeeee");
-  };
-*/
+
   deleteBtns.forEach((deleteBtn) => {
-    console.log('deletebouton nombre '+deleteBtns);
-    //deleteBtn.addEventListener('click', onDelete);
+    console.log('deletebouton nombre ' + deleteBtns);
     deleteBtn.addEventListener("click", onDelete);
   });
 
@@ -209,7 +183,7 @@ const onDelete = (e) => {
   console.log('dans le onDelete');
   const channelid = e.target.parentElement.parentElement.dataset.id;
   const user = getUserSessionData();
-  fetch(API_URL + "/channel/"+channelid, {
+  fetch(API_URL + "/channel/" + channelid, {
     method: "DELETE",
     headers: {
       Authorization: user.token,
@@ -222,12 +196,12 @@ const onDelete = (e) => {
         );
       return response.json();
     })
-    .then((data) => HomePage())//channelListTable(data.tableau))///?????????????
+    .then((data) => DelChannelPage())
     .catch((err) => onError(err));
 };
 
 const onError = (err) => {
-  console.error("Homepage::onError:", err);
+  console.error("DelChannelPage::onError:", err);
   let errorMessage = "Error";
   if (err.message) {
     if (err.message.includes("401"))
@@ -244,12 +218,7 @@ function inverseState(state) {
 
 
 
-
-
-
-
-
-export default HomePage;
+export default DelChannelPage;
 
 
 

@@ -15,20 +15,19 @@ const Navbar = () => {
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" 
-          >Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link" data-uri="/">Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link" data-uri="/delchannel">Supprimer Channel</a>
+          <span class="sr-only">(current)</span></a>
         </li>
         
         
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
+          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametres</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" 
-            >Mon Compte</a>
-            <a class="dropdown-item" 
-            >Mes states</a>
-            <a class="dropdown-item" 
-            >?</a>
+            <a class="dropdown-item" >Mon Compte</a>
+            <a class="dropdown-item"  >Mes stats</a>
+            
+            <a class="dropdown-item" >?</a>
           </div>
         </li>
       </ul>
@@ -48,14 +47,15 @@ const Navbar = () => {
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" data-uri="/">Accueil <span class="sr-only"></span></a>
+          <a class="nav-link" data-uri="/delchannel">Supprimer Channel</a><span class="sr-only">(current)</span></a>
         </li>
         
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item"  >Mon Compte</a>
-            <a class="dropdown-item" >Mes states</a>
+            <a class="dropdown-item" >Mon Compte</a>
+            <a class="dropdown-item" >Mes stats</a>
           </div>
         </li>
         <li class="nav-item">
@@ -63,8 +63,7 @@ const Navbar = () => {
       </li>
       </ul>
       <li class="nav-item active">
-      <a class="nav-link"  
-      >Login <span class="sr-only"></span></a>
+      <a class="nav-link">Login <span class="sr-only"></span></a>
     </li>
       
     </div>
