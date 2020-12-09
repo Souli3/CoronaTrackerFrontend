@@ -24,10 +24,12 @@ const Navbar = () => {
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametres</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" >Mon Compte</a>
-            <a class="dropdown-item"  >Mes stats</a>
-            
-            <a class="dropdown-item" >?</a>
+            <a class="dropdown-item" 
+            >Mon Compte</a>
+            <a class="dropdown-item" 
+            >Mes states</a>
+            <a class="dropdown-item" data-uri="/deleteaccount">DeleteAccount</a>
+            <a class="dropdown-item" data-uri="/logout">logout</a>
           </div>
         </li>
       </ul>
@@ -37,8 +39,7 @@ const Navbar = () => {
   </nav>`;
   } else {//pas connecter 2 eme cas en bas
     navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-    <a class="navbar-brand" 
-    >Corona Tracker</a>
+    <a class="navbar-brand" >Corona Tracker</a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -50,7 +51,6 @@ const Navbar = () => {
           <a class="nav-link" data-uri="/delchannel">Supprimer Channel</a><span class="sr-only">(current)</span></a>
         </li>
         
-        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -60,13 +60,9 @@ const Navbar = () => {
         </li>
         <li class="nav-item">
         <a class="nav-link"  data-uri="/login">Login <span class="sr-only"></span></a>
-      </li>
+        </li>
       </ul>
-      <li class="nav-item active">
-      <a class="nav-link">Login <span class="sr-only"></span></a>
-    </li>
-      
-    </div>
+  </div>    
   </nav>`;
   }
 

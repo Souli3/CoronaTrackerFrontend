@@ -1,5 +1,5 @@
-"use strict";
-
+"use strict"
+import creatBorad, { createBoard } from "./Dashboard.js";
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
@@ -44,7 +44,8 @@ const HomePage = () => {
   
         <div class="my-3 p-3 bg-white rounded box-shadow">
           <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          <h1> tableau de statistique a mettre ici</h1>
+          
+          <div id="board"></div>
         </div>
   
         
@@ -60,7 +61,7 @@ const HomePage = () => {
    `;
   page.innerHTML = homepage;
   channelList();
-
+  creatBorad();
 };
 
 const channelList = () => {
@@ -87,7 +88,7 @@ const channelList = () => {
 };
 
 const channelListTable = (data) => {
-  console.log("data is here"+data);
+  console.log("data is here" + data);
   if (!data) return;
   console.log(etat);
   let tableau;
@@ -161,10 +162,10 @@ const channelListTable = (data) => {
           <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
     </tr> `;
     }
-  
+
   });
 
- 
+
 
 
   tableau += ` </tbody>
@@ -183,7 +184,7 @@ const channelListTable = (data) => {
   };
 */
   deleteBtns.forEach((deleteBtn) => {
-    console.log('deletebouton nombre '+deleteBtns);
+    console.log('deletebouton nombre ' + deleteBtns);
     //deleteBtn.addEventListener('click', onDelete);
     deleteBtn.addEventListener("click", onDelete);
   });
@@ -209,7 +210,7 @@ const onDelete = (e) => {
   console.log('dans le onDelete');
   const channelid = e.target.parentElement.parentElement.dataset.id;
   const user = getUserSessionData();
-  fetch(API_URL + "/channel/"+channelid, {
+  fetch(API_URL + "/channel/" + channelid, {
     method: "DELETE",
     headers: {
       Authorization: user.token,
