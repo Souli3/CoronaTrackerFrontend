@@ -58,7 +58,12 @@ const HomePage = () => {
   </html>
    `;
    page.innerHTML=homepage;
-    channelList();
+   
+  
+
+
+
+  channelList();
 
 };
 

@@ -4,7 +4,7 @@ import {getUserSessionData} from "../utils/session.js";
 const Navbar = () => {
   let navbar;
   let user = getUserSessionData();    
-  if (user) {
+  if (!user) {
     navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" 
     >Corona Tracker</a>
@@ -55,7 +55,7 @@ const Navbar = () => {
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item"  >Mon Compte</a>
-            <a class="dropdown-item" >Mes states</a>
+            <a class="dropdown-item" data-uri="/addChannel">Cree un channel</a>
           </div>
         </li>
         <li class="nav-item">
