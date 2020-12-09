@@ -10,6 +10,7 @@
   "dependencies": {
     "bootstrap": "^4.5.2",
     "jquery": "^3.5.1",
+    "morris": "^0.1.4",
     "nodemon": "^2.0.6",
     "popper.js": "^1.16.1",
     "popular-movie-quotes": "^1.2.4"

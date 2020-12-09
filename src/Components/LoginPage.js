@@ -11,8 +11,8 @@ let loginPage = `
          <div class="login-main-text">
             <h1>CoronaTracker</h1><br><br>
             <h2>Login Page</h2>
-            <p>Veuillez vous connecter ou vous inscrire pour acceder au site.</p><br><br><br><br><br><br><br>
-            <p><i>Ce site est un type de forum utilise pour traquer les cas de covid en Belgique...</i><p>
+            <p>Veuillez vous connecter ou vous inscrire pour acceder a toutes les fonctionnalites du site.</p><br><br><br><br><br><br><br>
+            <p><i>Ce site est un blog utilise pour traquer les cas de covid en Belgique.</i><p>
             
             
          </div>
@@ -30,9 +30,9 @@ let loginPage = `
                      <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
                   </div>
                   <button type="submit" id="login" class="btn btn-secondary">Login</button>
-                  <button type="submit" id="register" class="btn btn-black">Register</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
                </form>
+               <button type="button" id="register" class="btn btn-black"  >Register</button>
             </div>
         </div>
 
@@ -44,6 +44,8 @@ const LoginPage = () => {
   page.innerHTML = loginPage;
 
   let loginForm = document.querySelector("form");
+  let registerForm = document.getElementById("register");
+ registerForm.addEventListener("click", onRegister);
   const user = getUserSessionData();
   if (user) {
     // re-render the navbar for the authenticated user
@@ -51,6 +53,11 @@ const LoginPage = () => {
     RedirectUrl("/");
   } else loginForm.addEventListener("submit", onLogin);
 };
+const onRegister =(e) =>{
+  Navbar();
+  RedirectUrl("/register");
+
+  }
 
 const onLogin = (e) => {
   e.preventDefault();
