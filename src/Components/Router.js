@@ -8,6 +8,7 @@ import HomePage from "./HomePage.js";
 import deleteAccount from "./DeleteAccount.js";
 
 
+
 const routes = {
   "/": HomePage,
   "/list": UserListPage,
@@ -16,6 +17,7 @@ const routes = {
   "/logout": LogoutComponent,
   "/error": ErrorPage,
   "/deleteaccount": deleteAccount,
+  
 
 };
 
