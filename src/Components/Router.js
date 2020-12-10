@@ -9,22 +9,25 @@ import ChannelAdd from "./AddChannel.js";
 
 import DelChannelPage from "./DelChannelPage.js";
 import DeleteAccount from "./DeleteAccount.js";
+
+import Search from "./Search.js";
+
 import MyAccountPage from "./MyAccountPage.js";
 
 
 
-
 const routes = {
-    "/": HomePage,
-    "/list": UserListPage,
-    "/login": LoginPage,
-    "/register": RegisterPage,
-    "/logout": LogoutComponent,
-    "/addChannel": ChannelAdd,
-    "/error": ErrorPage,
-    "/delchannel": DelChannelPage,
-    "/deleteaccount": DeleteAccount,
-    "/myaccount": MyAccountPage
+  "/": HomePage,
+  "/list": UserListPage,
+  "/login": LoginPage,
+  "/register": RegisterPage,
+  "/logout": LogoutComponent,
+  "/addChannel": ChannelAdd,
+  "/error": ErrorPage,
+  "/delchannel": DelChannelPage,
+  "/deleteaccount": DeleteAccount,
+  "/search":Search,
+  "/myaccount": MyAccountPage
 };
 
 let navBar = document.querySelector("#navBar");

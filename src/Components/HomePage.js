@@ -5,6 +5,9 @@ import { API_URL } from "../utils/server";
 import ChannelPage from "./ChannelPage.js"
 import UpdateChannel from "./UpdateChannel.js";
 import { getUserSessionData } from "../utils/session.js";
+import Search from "./Search.js";
+
+
 //import {ChannelList} from "./Channel/ChannelList.js";
 //import { RedirectUrl } from "./Router.js";
 //import Channel from "./Channel/ChannelList";
@@ -18,14 +21,15 @@ const HomePage = () => {
   
       <main role="main" class="container p-5">
         <div class="d-flex p-5 bg-purple rounded align-items-center">
-          <form class="form-inline  col-12">
-            <input class="form-control col-8" type="text" placeholder="Entrez votre recherche" aria-label="Search">
+          
+            <input class="form-control" id="titre" col-8" type="text" placeholder="Entrez votre recherche" aria-label="Search">
   
   
             <div class="p-2">
               
-              <select class="custom-select" id="validationCustom04" required>
+              <select class="custom-select" id="region" required>
                 <option selected disabled value="">Bruxelles</option>
+                <option>*</option>
                 <option>Bruxelles</option>
                 <option>Anvers</option>
                 <option>Liege</option>
@@ -40,8 +44,8 @@ const HomePage = () => {
   
   
   
-            <button id="rechercher" class="btn btn-outline-success " type="submit">Rechercher</button>
-          </form>
+            <button id="rechercher" class="btn btn-outline-success " >Rechercher</button>
+          
         </div>
   
         <div class="my-3 p-3 bg-white rounded box-shadow">
@@ -161,9 +165,9 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
             console.log(element.user)
-            if (user && element.user == user.username) {
+            if (getUserSessionData() && element.user == getUserSessionData().username) {
                 tableau += `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-              <td><button class="btn btn-dark delete">Delete</button></td>`;
+             `;
             }
             tableau += `</tr> `;
 
@@ -178,9 +182,9 @@ const channelListTable = (data) => {
 
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
 
-          if(user&&element.user==user.username){
+          if(getUserSessionData()&&element.user==getUserSessionData().username){
             tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-            <td><button id="delete" class="btn btn-dark delete">Delete</button></td>`;}
+            `;}
             tableau+= `</tr> `;
       
     }
@@ -198,6 +202,45 @@ const channelListTable = (data) => {
 
     document.querySelector("#tableau").innerHTML = tableau;
 
+  let btnOpen = document.getElementById("option1");
+  let btnClose = document.getElementById("option2");
+  btnOpen.onclick = function () {
+    console.log("oopen");
+    inverseState(true);
+    channelList();
+  };
+  btnClose.onclick = function () {
+    console.log("cloose");
+    inverseState(false);
+    channelList();
+  };
+  document.getElementById("rechercher").onclick = function (e){
+    onSearch(e);
+  };
+
+};
+const onSearch = (e) =>{
+    let titre = document.getElementById("titre").value;
+    if(!titre){
+      titre="*";
+    }
+    let region = document.getElementById("region").value;
+    
+ fetch(API_URL + "channel/"+titre+"/"+region, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(
+          "Error code : " + response.status + " : " + response.statusText
+        );
+      return response.json();
+    })
+    .then((data) => channelListTable(data))
+    .catch((err) => onError(err));
 
     let btnOpen = document.getElementById("option1");
     let btnClose = document.getElementById("option2");
