@@ -3,11 +3,12 @@
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
+import { RedirectUrl } from "./Router";
 
 var etat = false;
 const myAccountPage = () => {
-    console.log("DelChannelPage");
-    let deletepage = `<main role="main" class="container p-5">
+    console.log("MyAccountPage");
+    let accountpage = `<main role="main" class="container p-5">
 
   <div id="user">
   
@@ -16,14 +17,14 @@ const myAccountPage = () => {
 
 </html>
 `;
-    page.innerHTML = deletepage;
+    page.innerHTML = accountpage;
     userObj();
 
 };
 
 const userObj = () => {
 
-    setLayout("DelChannelPage");
+    setLayout("My Account Page");
 
     const user = getUserSessionData();
 
@@ -42,12 +43,12 @@ const userObj = () => {
                 );
             return response.json();
         })
-        .then((data) => channelListTable(data.user))
+        .then((data) => usercontainer(data.user))
         .catch((err) => onError(err));
 
 };
 
-const channelListTable = (data) => {
+const usercontainer = (data) => {
     if (!data) return;
     let userdata = `<br><br><br><br>
   <div class="container emp-profile">
@@ -59,10 +60,13 @@ const channelListTable = (data) => {
                             height: 100%;"/>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="profile-head">
                                     <h5>${data[0].fname} ${data[0].name}</h5>
                                     <h6>Membre</h6>
+                                    
+                                <button id="edit" type="button" class="btn btn-secondary">Modifier</button>
+                                <button id="deleteacc" type="button" class="btn btn-danger">Delete Account</button>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item"><br>
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes infos</a>
@@ -70,12 +74,11 @@ const channelListTable = (data) => {
                                 <li class="nav-item"><br>
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Info channels</a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                      <a  data-uri="/deleteaccount">Delete Account<span class="sr-only">(current)</span></a>
-                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-8">
@@ -88,7 +91,8 @@ const channelListTable = (data) => {
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6"> </div>
+                                            <div class="col-md-6"> 
+                                            </div>
                                             <div class="col-md-6">
                                                 <p>Prenom : ${data[0].fname}</p>
                                             </div>
@@ -119,6 +123,10 @@ const channelListTable = (data) => {
     userdata += ` </div>`;
 
     document.querySelector("#user").innerHTML = userdata;
+    let deleteBtn = document.getElementById("deleteacc");
+    deleteBtn.addEventListener("click", function() { RedirectUrl("/deleteaccount"); })
+
+
 };
 
 const onError = (err) => {

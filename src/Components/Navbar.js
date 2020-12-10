@@ -7,28 +7,28 @@ const Navbar = () => {
     let user = getUserSessionData();
     if (!user) { // pas connecte
         navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-    <img src="${MyImage}" alt="CoronaTracker logo" class="img-thumbnail">
-
+      <a data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
+        
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" data-uri="/">Accueil <span class="sr-only">(current)</span></a>
         </li>
         
         <li class="nav-item">
-        <a class="nav-link"  data-uri="/login">Login <span class="sr-only">(current)</span></a>
+          <a class="nav-link"  data-uri="/login">Login <span class="sr-only">(current)</span></a>
         </li>
+
         <li class="nav-item">
         <a class="nav-link"  data-uri="/register">Register <span class="sr-only">(current)</span></a>
         </li>
       </ul>
-     
-      
     </div>
   </nav>`;
     } else { //connecte
         navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-    <img src="${MyImage}" alt="CoronaTracker logo" class="img-thumbnail">
+        <a data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
@@ -41,7 +41,6 @@ const Navbar = () => {
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" data-uri="/addChannel">Cree un channel<span class="sr-only">(current)</span></a>
             <a class="dropdown-item"  data-uri="/delchannel">Mes channels <span class="sr-only">(current)</span></a>
-            <a class="dropdown-item" data-uri="/deleteaccount">DeleteAccount<span class="sr-only">(current)</span></a>
           </div>
         </li>
 

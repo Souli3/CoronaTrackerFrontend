@@ -294,10 +294,11 @@ body {
 
 /* Site Logo */
 
-.img-thumbnail {
+
+/* .logo {
     width: 90px;
     height: 90px;
-}
+} */
 
 .ibox {
     clear: both;
