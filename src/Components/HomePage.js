@@ -8,11 +8,11 @@ import { getUserSessionData } from "../utils/session.js";
 //import {ChannelList} from "./Channel/ChannelList.js";
 //import { RedirectUrl } from "./Router.js";
 //import Channel from "./Channel/ChannelList";
-var user=getUserSessionData();
-var etat=false;
-const HomePage = () => {    
-  console.log("homepage");
-  let homepage = `
+var user = getUserSessionData();
+var etat = false;
+const HomePage = () => {
+    console.log("homepage");
+    let homepage = `
   
       
   
@@ -63,44 +63,48 @@ const HomePage = () => {
    `;
 
 
-  page.innerHTML = homepage;
-  channelList();
+    page.innerHTML = homepage;
+    channelList();
 
-  creatBorad();
+    creatBorad();
 };
 
 const channelList = () => {
 
-  setLayout("Home page");
+    setLayout("Home page");
 
-  fetch(API_URL + "channel", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    })
-    .then((data) => channelListTable(data.tableau)).then(()=>{let btns=document.querySelectorAll(".plus");
-     btns.forEach(e=>e.addEventListener("click", viewChannel))}).then(()=>{(document.querySelectorAll(".update")).forEach(e=>e.addEventListener('click',onupdate))})
-    .catch((err) => onError(err));
+    fetch(API_URL + "channel", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error(
+                    "Error code : " + response.status + " : " + response.statusText
+                );
+            return response.json();
+        })
+        .then((data) => channelListTable(data.tableau)).then(() => {
+            let btns = document.querySelectorAll(".plus");
+            btns.forEach(e => e.addEventListener("click", viewChannel))
+        }).then(() => {
+            (document.querySelectorAll(".update")).forEach(e => e.addEventListener('click', onupdate))
+        })
+        .catch((err) => onError(err));
 
 
 };
 
 const channelListTable = (data) => {
-  console.log("data is here" + data);
-  if (!data) return;
-  console.log(etat);
-  let tableau;
+    console.log("data is here" + data);
+    if (!data) return;
+    console.log(etat);
+    let tableau;
 
-  if (etat) {
-    tableau = `
+    if (etat) {
+        tableau = `<br><br><br>
     <div class="my-3 p-3 bg-white rounded box-shadow">
     <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
     <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
@@ -115,8 +119,8 @@ const channelListTable = (data) => {
   
   
   `;
-  } else {
-    tableau = `
+    } else {
+        tableau = `
       <div class="my-3 p-3 bg-white rounded box-shadow">
       <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
@@ -128,9 +132,9 @@ const channelListTable = (data) => {
       </div>
     `;
 
-  }
+    }
 
-  tableau += `
+    tableau += `
   <table class="table table-hover">
         <thead>
           <tr class="bg-primary">
@@ -145,9 +149,9 @@ const channelListTable = (data) => {
   `;
 
 
-  data.forEach((element) => {
-    if (element.state == "ouvert" && etat) {
-      tableau += `
+    data.forEach((element) => {
+        if (element.state == "ouvert" && etat) {
+            tableau += `
     <tr data-id="${element.id}">
 
           <th scope="row">${element.id}</th>
@@ -156,14 +160,15 @@ const channelListTable = (data) => {
           <td>${element.date}</td>
           <td>${element.state}</td>
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
-          console.log(element.user)
-          if(user&&element.user==user.username){
-            tableau+=   `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-              <td><button class="btn btn-dark delete">Delete</button></td>`;}
-            tableau+= `</tr> `;
-    
-    } else if (element.state == "ferme" && !etat) {
-      tableau += `
+            console.log(element.user)
+            if (user && element.user == user.username) {
+                tableau += `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
+              <td><button class="btn btn-dark delete">Delete</button></td>`;
+            }
+            tableau += `</tr> `;
+
+        } else if (element.state == "ferme" && !etat) {
+            tableau += `
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
@@ -172,6 +177,7 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
 
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
+
           if(user&&element.user==user.username){
             tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
             <td><button id="delete" class="btn btn-dark delete">Delete</button></td>`;}
@@ -183,97 +189,58 @@ const channelListTable = (data) => {
 
 
 
-  tableau += ` </tbody>
+
+    tableau += ` </tbody>
 
       </table>
       </div>
   `;
 
-  document.querySelector("#tableau").innerHTML = tableau;
+    document.querySelector("#tableau").innerHTML = tableau;
 
 
+    let btnOpen = document.getElementById("option1");
+    let btnClose = document.getElementById("option2");
+    btnOpen.onclick = function() {
+        console.log("oopen");
+        inverseState(true);
+        channelList();
+    };
+    btnClose.onclick = function() {
+        console.log("cloose");
+        inverseState(false);
+        channelList();
+    };
 
-  const deleteBtns = document.querySelectorAll(".delete");
-  /*let btndelete=  document.getElementById("delete");
-  btndelete.onclick = function(){
-    console.log("deteeeeeeeeeeeeeeeeeeee");
-  };
-*/
-  deleteBtns.forEach((deleteBtn) => {
-    console.log('deletebouton nombre ' + deleteBtns);
-    //deleteBtn.addEventListener('click', onDelete);
-    deleteBtn.addEventListener("click", onDelete);
-  });
-
-
-  let btnOpen = document.getElementById("option1");
-  let btnClose = document.getElementById("option2");
-  btnOpen.onclick = function () {
-    console.log("oopen");
-    inverseState(true);
-    channelList();
-  };
-  btnClose.onclick = function () {
-    console.log("cloose");
-    inverseState(false);
-    channelList();
-  };
-
-};
-
-const onDelete = (e) => {
-  // the id is given in the current table row under data-id attribute
-  console.log('dans le onDelete');
-  const channelid = e.target.parentElement.parentElement.dataset.id;
-  const user = getUserSessionData();
-  fetch(API_URL + "/channel/" + channelid, {
-    method: "DELETE",
-    headers: {
-      Authorization: user.token,
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    })
-    .then((data) => HomePage())//channelListTable(data.tableau))///?????????????
-    .catch((err) => onError(err));
 };
 
 const onError = (err) => {
-  console.error("Homepage::onError:", err);
-  let errorMessage = "Error";
-  if (err.message) {
-    if (err.message.includes("401"))
-      errorMessage =
-        "Site has a little problem.";
-    else errorMessage = err.message;
-  }
+    console.error("Homepage::onError:", err);
+    let errorMessage = "Error";
+    if (err.message) {
+        if (err.message.includes("401"))
+            errorMessage =
+            "Site has a little problem.";
+        else errorMessage = err.message;
+    }
 };
 
 
-function inverseState(state){
-  etat=state;
+function inverseState(state) {
+    etat = state;
 }
 
 
-let viewChannel=(e)=>{
-  
- let idChannel=e.target.parentElement.parentElement.dataset.id;
-  ChannelPage(idChannel);
+let viewChannel = (e) => {
+
+    let idChannel = e.target.parentElement.parentElement.dataset.id;
+    ChannelPage(idChannel);
 
 }
-let onupdate=(e)=>{
-  let idChannel=e.target.parentElement.parentElement.dataset.id;
-  UpdateChannel(idChannel);
+let onupdate = (e) => {
+    let idChannel = e.target.parentElement.parentElement.dataset.id;
+    UpdateChannel(idChannel);
 }
-
-
-
-
 
 
 
@@ -284,7 +251,3 @@ let onupdate=(e)=>{
 
 
 export default HomePage;
-
-
-
-
