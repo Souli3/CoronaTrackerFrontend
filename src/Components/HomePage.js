@@ -90,7 +90,8 @@ const channelList = () => {
             let btns = document.querySelectorAll(".plus");
             btns.forEach(e => e.addEventListener("click", viewChannel))
         }).then(() => {
-            (document.querySelectorAll(".update")).forEach(e => e.addEventListener('click', onupdate)) })
+            (document.querySelectorAll(".update")).forEach(e => e.addEventListener('click', onupdate))
+        })
         .catch((err) => onError(err));
 
 
@@ -103,7 +104,7 @@ const channelListTable = (data) => {
     let tableau;
 
     if (etat) {
-        tableau = `
+        tableau = `<br><br><br>
     <div class="my-3 p-3 bg-white rounded box-shadow">
     <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
     <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
