@@ -21,11 +21,12 @@ const AddChannel = ()=>{
     <div class="form-group">
       <label for="exampleFormControlSelect1">Selectionnez une lieux</label>
       <select class="form-control" id="region">
-        <option>Bruxelles</option>
-        <option>Anvers</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+      <option>Bruxelles</option>
+      <option>Anvers</option>
+      <option>Liege</option>
+      <option>Mons</option>
+      <option>Namur</option>
+      <option>Gand</option>
       </select>
     </div>
     
@@ -88,9 +89,20 @@ const onAddChannel = (e) =>{
 
 
 };
+const onError = (err) => {
+  console.error("Homepage::onError:", err);
+  let errorMessage = "Error";
+  if (err.message) {
+    if (err.message.includes("401"))
+      errorMessage =
+        "Site has a little probleme.";
+    else errorMessage = err.message;
+  }
+  //RedirectUrl("/error", errorMessage);
+};
 
 const onChannelAdded = (data) => {
-    RedirectUrl("/addChannel");
+    RedirectUrl("/");
 };
 
 

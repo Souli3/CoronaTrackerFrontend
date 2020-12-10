@@ -79,8 +79,7 @@ const onUpdate=()=>{
         title:title,
         sujet:subject
     } 
-    
-   console.log(channel)
+
     fetch(API_URL+"channel",{
       method: "PUT",
       body:JSON.stringify({channel}),

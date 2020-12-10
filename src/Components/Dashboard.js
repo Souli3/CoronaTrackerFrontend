@@ -3,14 +3,14 @@ import { API_URL } from "../utils/server.js";
 let creatBorad=()=>{
     let cont=[];
 console.log("GET data");
-   //fetch('https://data.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-pandemic-belgium-hosp-province%40public&sort=date&facet=date&facet=province&facet=region', {
+   //fetch('https://data.opendatasoft.com/api/records/1.0/search/?dataset=covid-19-pandemic-belgium-hosp-previonce%40public&sort=date&facet=date&facet=region&facet=region', {
    fetch(API_URL+"cases/", {
    method: "get",headers:{
       
     }}).then(response => response.json())
-  .then(data => {data.board/* .records */.map(element => {cont.push({province: `${/* element.fields.province */element.province}`,'À l hôpital' :(/* element.fields .nr_reporting*/element["hôpital"]),'Cas Confirme' :(/* element.fields.new_in */element["CasConfirme"]),'Rétabli' :(/* element.fields. new_out*/element["Rétabli"])}) })
+  .then(data => {data.board/* .records */.map(element => {cont.push({region: `${/* element.fields.region */element.region}`,'ouvert' :(/* element.fields.new_in */element["ouvert"]),'ferme' :(/* element.fields. new_out*/element["ferme"])}) })
   make(cont)
-
+    console.log(cont)
 })
 
 function make(cont){
@@ -26,15 +26,15 @@ function make(cont){
     fillOpacity: 4,
     data: cont,
     // The name of the data record attribute that contains x-values.
-    xkey: `province`,
+    xkey: `region`,
     // A list of names of data record attributes that contain y-values.
-    ykeys: ['À l hôpital','Cas Confirme','Rétabli'],
+    ykeys: ['ouvert','ferme'],
     // Labels for the ykeys -- will be displayed when you hover over the
-    labels: ['À l hôpital','Cas Confirme','Rétabli'],
+    labels: ['ouvert','ferme'],
     gridTextSize:8,
     gridTextWeight:540,
     gridTextColor:'white',
-    barColors: ['orange','red',' rgb(34, 177, 77)',]
+    barColors: ['red',' rgb(34, 177, 77)',]
 })
 
 }}
