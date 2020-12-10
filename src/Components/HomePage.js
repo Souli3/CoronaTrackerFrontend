@@ -161,9 +161,9 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
             console.log(element.user)
-            if (user && element.user == user.username) {
+            if (getUserSessionData() && element.user == getUserSessionData().username) {
                 tableau += `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-              <td><button class="btn btn-dark delete">Delete</button></td>`;
+             `;
             }
             tableau += `</tr> `;
 
@@ -178,9 +178,9 @@ const channelListTable = (data) => {
 
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
 
-          if(user&&element.user==user.username){
+          if(getUserSessionData()&&element.user==getUserSessionData().username){
             tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-            <td><button id="delete" class="btn btn-dark delete">Delete</button></td>`;}
+            `;}
             tableau+= `</tr> `;
       
     }

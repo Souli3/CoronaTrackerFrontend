@@ -475,3 +475,21 @@ body {
 #register {
     margin-top: 2%;
 }
+.morris-default-style{
+    display: inline-flex;
+    radius:10px;
+    padding:1px;
+    background:rgba(255, 255, 255, 0.8);
+    border:solid 2px rgba(230, 230, 230, 0.8);
+    font-family:serif;
+    font-size:12px;
+    text-align:center;
+    height: 29px;
+    width: 150px;
+    word-spacing: 30px;
+    
+}
+.channel{
+    background-color: lightblue;
+    margin-top: 15px;
+}

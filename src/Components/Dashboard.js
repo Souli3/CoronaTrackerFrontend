@@ -16,8 +16,8 @@ console.log("GET data");
 function make(cont){
  let  board=document.getElementById("board");
  if(board.innerText!='')return
- board.style.width = "1200px";
-  board.style.height= "300px";
+ board.style.width = "1010px";
+  board.style.height= "230px";
   board.style.border="2px solid";
   
   new Morris.Bar({
@@ -34,7 +34,10 @@ function make(cont){
     gridTextSize:8,
     gridTextWeight:540,
     gridTextColor:'white',
-    barColors: ['red',' rgb(34, 177, 77)',]
+    barColors: ['red',' rgb(34, 177, 77)',],
+    resize:true,
+    redraw:true,
+    lineWidth: '3px',
 })
 
 }}
