@@ -16,7 +16,7 @@ const FOOTER_TEXT = "Happy learning : )";
 //document.querySelector("page").innerHTML="hah";
 //document.getElementById("page").innerText="fsdqfs";
 
-console.log("rezoiarhzpeohfpqsodifhpodsqhfposhfpioshopfhspodqhf");
+console.log("INDEX.JS");
 
 
 

@@ -4,7 +4,7 @@ import {getUserSessionData} from "../utils/session.js";
 const Navbar = () => {
   let navbar;
   let user = getUserSessionData();    
-  if (user) {
+  if (!user) {
     navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
     <a class="navbar-brand" 
     >Corona Tracker</a>
@@ -15,13 +15,14 @@ const Navbar = () => {
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" data-uri="/"
-          >Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link" data-uri="/">Accueil <span class="sr-only">(current)</span></a>
+          <a class="nav-link" data-uri="/delchannel">Supprimer Channel</a>
+          <span class="sr-only">(current)</span></a>
         </li>
         
         
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
+          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametres</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" 
             >Mon Compte</a>
@@ -47,13 +48,15 @@ const Navbar = () => {
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <a class="nav-link" data-uri="/">Accueil <span class="sr-only"></span></a>
+          <a class="nav-link" data-uri="/delchannel">Supprimer Channel</a><span class="sr-only">(current)</span></a>
         </li>
         
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Parametre</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item"  >Mon Compte</a>
-            <a class="dropdown-item" >Mes states</a>
+            <a class="dropdown-item" data-uri="/addChannel">Cree un channel</a>
+
           </div>
         </li>
         <li class="nav-item">

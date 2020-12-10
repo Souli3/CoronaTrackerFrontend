@@ -5,7 +5,12 @@ import RegisterPage from "./RegisterPage.js";
 import LogoutComponent from "./LogoutComponent.js";
 import ErrorPage from "./ErrorPage.js";
 import HomePage from "./HomePage.js";
-import deleteAccount from "./DeleteAccount.js";
+
+import ChannelAdd from "./AddChannel.js";
+
+import DelChannelPage from "./DelChannelPage.js";
+import DeleteAccount from "./DeleteAccount.js";
+
 
 
 
@@ -15,9 +20,10 @@ const routes = {
   "/login": LoginPage,
   "/register": RegisterPage,
   "/logout": LogoutComponent,
+  "/addChannel": ChannelAdd,
   "/error": ErrorPage,
-  "/deleteaccount": deleteAccount,
-  
+  "/delchannel": DelChannelPage,
+  "/deleteaccount": DeleteAccount
 
 };
 

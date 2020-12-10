@@ -1,21 +1,14 @@
-"use strict"
-import creatBorad from "./Dashboard.js";
+"use strict";
+
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
-import ChannelPage from "./ChannelPage.js"
-import UpdateChannel from "./UpdateChannel.js";
 import { getUserSessionData } from "../utils/session.js";
-//import {ChannelList} from "./Channel/ChannelList.js";
-//import { RedirectUrl } from "./Router.js";
-//import Channel from "./Channel/ChannelList";
-var user=getUserSessionData();
-var etat=false;
-const HomePage = () => {    
-  console.log("homepage");
-  let homepage = `
-  
-      
-  
+
+var etat = false;
+const DelChannelPage = () => {
+  console.log("DelChannelPage");
+  let deletepage = `
+
       <main role="main" class="container p-5">
         <div class="d-flex p-5 bg-purple rounded align-items-center">
           <form class="form-inline  col-12">
@@ -37,44 +30,31 @@ const HomePage = () => {
                 Please select a valid state.
               </div>
             </div>
-  
-  
-  
+
             <button id="rechercher" class="btn btn-outline-success " type="submit">Rechercher</button>
           </form>
         </div>
-  
-        <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          
-          <div id="board"></div>
-        </div>
-  
-        
+
         <div id="tableau"></div>
-          
-            
-              
-            
+
       </main>
     
-  
   </html>
    `;
-
-
-  page.innerHTML = homepage;
+  page.innerHTML = deletepage;
   channelList();
 
-  creatBorad();
 };
 
 const channelList = () => {
 
-  setLayout("Home page");
+  setLayout("DelChannelPage");
 
-  fetch(API_URL + "channel", {
-    method: "POST",
+  const user = getUserSessionData();
+
+  fetch(API_URL + "channel/mychannels", {
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    body: JSON.stringify(user), // body data type must match "Content-Type" header
     headers: {
       "Content-Type": "application/json",
     },
@@ -84,17 +64,14 @@ const channelList = () => {
         throw new Error(
           "Error code : " + response.status + " : " + response.statusText
         );
-      return response.json();
+      return response.json(); 
     })
-    .then((data) => channelListTable(data.tableau)).then(()=>{let btns=document.querySelectorAll(".plus");
-     btns.forEach(e=>e.addEventListener("click", viewChannel))}).then(()=>{(document.querySelectorAll(".update")).forEach(e=>e.addEventListener('click',onupdate))})
+    .then((data) => channelListTable(data.tableau))
     .catch((err) => onError(err));
-
 
 };
 
 const channelListTable = (data) => {
-  console.log("data is here" + data);
   if (!data) return;
   console.log(etat);
   let tableau;
@@ -102,23 +79,19 @@ const channelListTable = (data) => {
   if (etat) {
     tableau = `
     <div class="my-3 p-3 bg-white rounded box-shadow">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
     <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
       <label class="btn  btn-primary col-6 active">
         <input type="radio" name="options" id="option1" autocomplete="off" checked data-uri="/">Channel ouvert</label>
       <label class="btn  btn-secondary  col-6">
         <input type="radio" name="options" id="option2" autocomplete="off" data-uri="/fermé">Channel fermé</label>
     </div>
-
-  
-  
-  
   
   `;
   } else {
     tableau = `
       <div class="my-3 p-3 bg-white rounded box-shadow">
-      <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
+      <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
         <label class="btn  btn-secondary  col-6 active">
           <input type="radio" name="options" id="option1" autocomplete="off" >Channel ouvert</label>
@@ -149,34 +122,24 @@ const channelListTable = (data) => {
     if (element.state == "ouvert" && etat) {
       tableau += `
     <tr data-id="${element.id}">
-
+        
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>${element.region}</td>
+          <td>?</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
-          console.log(element.user)
-          if(user&&element.user==user.username){
-            tableau+=   `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-              <td><button class="btn btn-dark delete">Delete</button></td>`;}
-            tableau+= `</tr> `;
-    
+          <td><button class="btn btn-dark delete">Delete</button></td>
+    </tr> `;
     } else if (element.state == "ferme" && !etat) {
       tableau += `
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>${element.region}</td>
+          <td>?</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-
-          <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
-          if(element.user==user.username){
-            tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-            <td><button id="delete" class="btn btn-dark delete">Delete</button></td>`;}
-            tableau+= `</tr> `;
-      
+          <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
+    </tr> `;
     }
   });
 
@@ -184,7 +147,6 @@ const channelListTable = (data) => {
 
 
   tableau += ` </tbody>
-
       </table>
       </div>
   `;
@@ -194,14 +156,9 @@ const channelListTable = (data) => {
 
 
   const deleteBtns = document.querySelectorAll(".delete");
-  /*let btndelete=  document.getElementById("delete");
-  btndelete.onclick = function(){
-    console.log("deteeeeeeeeeeeeeeeeeeee");
-  };
-*/
+
   deleteBtns.forEach((deleteBtn) => {
     console.log('deletebouton nombre ' + deleteBtns);
-    //deleteBtn.addEventListener('click', onDelete);
     deleteBtn.addEventListener("click", onDelete);
   });
 
@@ -239,12 +196,12 @@ const onDelete = (e) => {
         );
       return response.json();
     })
-    .then((data) => HomePage())//channelListTable(data.tableau))///?????????????
+    .then((data) => DelChannelPage())
     .catch((err) => onError(err));
 };
 
 const onError = (err) => {
-  console.error("Homepage::onError:", err);
+  console.error("DelChannelPage::onError:", err);
   let errorMessage = "Error";
   if (err.message) {
     if (err.message.includes("401"))
@@ -254,36 +211,14 @@ const onError = (err) => {
   }
 };
 
-
-function inverseState(state){
-  etat=state;
-}
-
-
-let viewChannel=(e)=>{
-  
- let idChannel=e.target.parentElement.parentElement.dataset.id;
-  ChannelPage(idChannel);
-
-}
-let onupdate=(e)=>{
-  let idChannel=e.target.parentElement.parentElement.dataset.id;
-  UpdateChannel(idChannel);
-}
+function inverseState(state) {
+  etat = state;
+};
 
 
 
 
-
-
-
-
-
-
-
-
-
-export default HomePage;
+export default DelChannelPage;
 
 
 
