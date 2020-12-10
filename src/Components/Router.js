@@ -13,6 +13,7 @@ import DeleteAccount from "./DeleteAccount.js";
 
 
 
+
 const routes = {
   "/": HomePage,
   "/list": UserListPage,
@@ -23,6 +24,7 @@ const routes = {
   "/error": ErrorPage,
   "/delchannel": DelChannelPage,
   "/deleteaccount": DeleteAccount
+
 };
 
 let navBar = document.querySelector("#navBar");

@@ -1,14 +1,16 @@
 "use strict"
-import creatBorad, { createBoard } from "./Dashboard.js";
+import creatBorad from "./Dashboard.js";
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
+import ChannelPage from "./ChannelPage.js"
+import UpdateChannel from "./UpdateChannel.js";
 import { getUserSessionData } from "../utils/session.js";
-
 //import {ChannelList} from "./Channel/ChannelList.js";
 //import { RedirectUrl } from "./Router.js";
 //import Channel from "./Channel/ChannelList";
-var etat = false;
-const HomePage = () => {
+var user=getUserSessionData();
+var etat=false;
+const HomePage = () => {    
   console.log("homepage");
   let homepage = `
   
@@ -60,8 +62,10 @@ const HomePage = () => {
   </html>
    `;
 
+
   page.innerHTML = homepage;
   channelList();
+
   creatBorad();
 };
 
@@ -82,7 +86,8 @@ const channelList = () => {
         );
       return response.json();
     })
-    .then((data) => channelListTable(data.tableau))
+    .then((data) => channelListTable(data.tableau)).then(()=>{let btns=document.querySelectorAll(".plus");
+     btns.forEach(e=>e.addEventListener("click", viewChannel))}).then(()=>{(document.querySelectorAll(".update")).forEach(e=>e.addEventListener('click',onupdate))})
     .catch((err) => onError(err));
 
 
@@ -144,32 +149,42 @@ const channelListTable = (data) => {
     if (element.state == "ouvert" && etat) {
       tableau += `
     <tr data-id="${element.id}">
-        
+
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>?</td>
+          <td>${element.region}</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button class="btn btn-dark delete">Delete</button></td>
-    </tr> `;
+          <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
+          console.log(element.user)
+          if(user&&element.user==user.username){
+            tableau+=   `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
+              <td><button class="btn btn-dark delete">Delete</button></td>`;}
+            tableau+= `</tr> `;
+    
     } else if (element.state == "ferme" && !etat) {
       tableau += `
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>?</td>
+          <td>${element.region}</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
-    </tr> `;
-    }
 
+          <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
+          if(element.user==user.username){
+            tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
+            <td><button id="delete" class="btn btn-dark delete">Delete</button></td>`;}
+            tableau+= `</tr> `;
+      
+    }
   });
 
 
 
 
   tableau += ` </tbody>
+
       </table>
       </div>
   `;
@@ -239,9 +254,26 @@ const onError = (err) => {
   }
 };
 
-function inverseState(state) {
-  etat = state;
-};
+
+function inverseState(state){
+  etat=state;
+}
+
+
+let viewChannel=(e)=>{
+  
+ let idChannel=e.target.parentElement.parentElement.dataset.id;
+  ChannelPage(idChannel);
+
+}
+let onupdate=(e)=>{
+  let idChannel=e.target.parentElement.parentElement.dataset.id;
+  UpdateChannel(idChannel);
+}
+
+
+
+
 
 
 
