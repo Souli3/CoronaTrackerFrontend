@@ -464,8 +464,12 @@ body {
     position: sticky;
 }
 
-.morris-hover-point {
-    display: inline;
+#navBar {
+    margin-bottom: 5%;
+}
+
+#title {
+    width: 800%;
 }
 
 #register {
