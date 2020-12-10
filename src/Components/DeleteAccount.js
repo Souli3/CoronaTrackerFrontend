@@ -14,6 +14,7 @@ import { API_URL } from "../utils/server.js";
     body: JSON.stringify(user), // body data type must match "Content-Type" header
     headers: {
       "Content-Type": "application/json",
+      Authorization: user.token,
     },
   })
     .then((data) => onUserLogout())

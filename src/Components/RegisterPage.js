@@ -52,56 +52,56 @@ let registerPage = `
   </div>`;
 
 const RegisterPage = () => {
-  let page = document.getElementById("page");
-  page.innerHTML = registerPage;
-  let registerForm = document.querySelector("form");
-  registerForm.addEventListener("submit", onRegister);
+    let page = document.getElementById("page");
+    page.innerHTML = registerPage;
+    let registerForm = document.querySelector("form");
+    registerForm.addEventListener("submit", onRegister);
 };
 
-const onRegister = async (e) => {
-  e.preventDefault();
-  let user = {
-    fname: document.getElementById("fname").value,
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-   confpassword: document.getElementById("confpassword").value,
+const onRegister = async(e) => {
+    e.preventDefault();
+    let user = {
+        fname: document.getElementById("fname").value,
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        confpassword: document.getElementById("confpassword").value,
 
-  };
-  
-try{
-  let response = await fetch("/api/users/", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(user), // body data type must match "Content-Type" header
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-  console.log(response);
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText);
-    let jsonResponse = await response.json();
-    console.log("Response from JSON" , jsonResponse);
-    setUserSessionData(jsonResponse);
-  Navbar(jsonResponse);
-  RedirectUrl("/list");
+    };
 
-}catch(err){
-  let messageBoard = document.querySelector("#messageBoard");
-  let errorMessage = "";
-  if (err.message.includes("409"))
-    errorMessage = "This user is already registered.";
-    
-   else if(err.message.includes("408"))
-    errorMessage = "Confirmation de motDePasse n'est pas correct ";
-  else errorMessage = err.message;
+    try {
+        let response = await fetch("/api/users/", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(user), // body data type must match "Content-Type" header
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        console.log(response);
+        if (!response.ok)
+            throw new Error(
+                "Error code : " + response.status + " : " + response.statusText);
+        let jsonResponse = await response.json();
+        console.log("Response from JSON", jsonResponse);
+        setUserSessionData(jsonResponse);
+        Navbar(jsonResponse);
+        RedirectUrl("/");
 
-  messageBoard.innerText = errorMessage;
-  // show the messageBoard div (add relevant Bootstrap class)
-  messageBoard.classList.add("d-block");
-  
-}
+    } catch (err) {
+        let messageBoard = document.querySelector("#messageBoard");
+        let errorMessage = "";
+        if (err.message.includes("409"))
+            errorMessage = "This user is already registered.";
+
+        else if (err.message.includes("408"))
+            errorMessage = "Confirmation de motDePasse n'est pas correct ";
+        else errorMessage = err.message;
+
+        messageBoard.innerText = errorMessage;
+        // show the messageBoard div (add relevant Bootstrap class)
+        messageBoard.classList.add("d-block");
+
+    }
 }
 
 export default RegisterPage;

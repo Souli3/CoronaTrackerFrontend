@@ -31,8 +31,9 @@ let loginPage = `
                   </div>
                   <button type="submit" id="login" class="btn btn-secondary">Login</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
+                  <br><p>Vous n'avez pas de compte?</p>
+                  <button type="button" id="register" class="btn btn-black"  >Register</button>
                </form>
-               <button type="button" id="register" class="btn btn-black"  >Register</button>
             </div>
         </div>
 

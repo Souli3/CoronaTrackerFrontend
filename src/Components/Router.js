@@ -10,6 +10,7 @@ import ChannelAdd from "./AddChannel.js";
 
 import DelChannelPage from "./DelChannelPage.js";
 import DeleteAccount from "./DeleteAccount.js";
+import MyAccountPage from "./MyAccountPage.js";
 
 
 
@@ -22,7 +23,8 @@ const routes = {
   "/addChannel": ChannelAdd,
   "/error": ErrorPage,
   "/delchannel": DelChannelPage,
-  "/deleteaccount": DeleteAccount
+  "/deleteaccount": DeleteAccount,
+  "/myaccount": MyAccountPage
 };
 
 let navBar = document.querySelector("#navBar");

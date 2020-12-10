@@ -2,7 +2,6 @@
 import creatBorad, { createBoard } from "./Dashboard.js";
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
-import { getUserSessionData } from "../utils/session.js";
 
 //import {ChannelList} from "./Channel/ChannelList.js";
 //import { RedirectUrl } from "./Router.js";
@@ -150,7 +149,6 @@ const channelListTable = (data) => {
           <td>?</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button class="btn btn-dark delete">Delete</button></td>
     </tr> `;
     } else if (element.state == "ferme" && !etat) {
       tableau += `
@@ -160,7 +158,6 @@ const channelListTable = (data) => {
           <td>?</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
     </tr> `;
     }
 
@@ -175,20 +172,6 @@ const channelListTable = (data) => {
   `;
 
   document.querySelector("#tableau").innerHTML = tableau;
-
-
-
-  const deleteBtns = document.querySelectorAll(".delete");
-  /*let btndelete=  document.getElementById("delete");
-  btndelete.onclick = function(){
-    console.log("deteeeeeeeeeeeeeeeeeeee");
-  };
-*/
-  deleteBtns.forEach((deleteBtn) => {
-    console.log('deletebouton nombre ' + deleteBtns);
-    //deleteBtn.addEventListener('click', onDelete);
-    deleteBtn.addEventListener("click", onDelete);
-  });
 
 
   let btnOpen = document.getElementById("option1");
@@ -206,28 +189,6 @@ const channelListTable = (data) => {
 
 };
 
-const onDelete = (e) => {
-  // the id is given in the current table row under data-id attribute
-  console.log('dans le onDelete');
-  const channelid = e.target.parentElement.parentElement.dataset.id;
-  const user = getUserSessionData();
-  fetch(API_URL + "/channel/" + channelid, {
-    method: "DELETE",
-    headers: {
-      Authorization: user.token,
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    })
-    .then((data) => HomePage())//channelListTable(data.tableau))///?????????????
-    .catch((err) => onError(err));
-};
-
 const onError = (err) => {
   console.error("Homepage::onError:", err);
   let errorMessage = "Error";
@@ -242,10 +203,6 @@ const onError = (err) => {
 function inverseState(state) {
   etat = state;
 };
-
-
-
-
 
 
 
