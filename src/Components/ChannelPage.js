@@ -2,7 +2,7 @@ import { API_URL } from "../utils/server";
 import UpdateChannel from "./UpdateChannel.js";
 var html=(id,title,sujet,date,etat,region,user)=>{
   return   `
-  <main role="main" class="container p-5 border border-primary">
+  <main role="main"  class="container channel p-5 border border-primary">
   <div class="container-fluid">
   <p>
   Title :   ${title} <br>
