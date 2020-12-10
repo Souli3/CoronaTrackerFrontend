@@ -21,7 +21,7 @@ let registerPage = `
 <div class="main">
          <div class="col-md-6 col-sm-12">
 <div class="register-form"><form>
-<div class="form-group">
+<div class="form-group"><br><br><br><br>
   <label for="firstName">Prénom</label>
   <input class="form-control" id="fname" type="text" name="fname" placeholder="Entrez votre Prénom " required="" pattern="^([a-zA-Z]|\s)*$"
   />

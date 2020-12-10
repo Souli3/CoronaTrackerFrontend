@@ -1,13 +1,11 @@
 "use strict";
-
-import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
 
 var etat = false;
 const DelChannelPage = () => {
-  console.log("DelChannelPage");
-  let deletepage = `
+    console.log("DelChannelPage");
+    let deletepage = `
 
       <main role="main" class="container p-5">
         <div class="d-flex p-5 bg-purple rounded align-items-center">
@@ -41,46 +39,44 @@ const DelChannelPage = () => {
     
   </html>
    `;
-  page.innerHTML = deletepage;
-  channelList();
+    page.innerHTML = deletepage;
+    channelList();
 
 };
 
 const channelList = () => {
 
-  setLayout("DelChannelPage");
+    const user = getUserSessionData();
 
-  const user = getUserSessionData();
-
-  fetch(API_URL + "channel/mychannels", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(user), // body data type must match "Content-Type" header
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: user.token,
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json(); 
-    })
-    .then((data) => channelListTable(data.tableau))
-    .catch((err) => onError(err));
+    fetch(API_URL + "channel/mychannels", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(user), // body data type must match "Content-Type" header
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: user.token,
+            },
+        })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error(
+                    "Error code : " + response.status + " : " + response.statusText
+                );
+            return response.json();
+        })
+        .then((data) => channelListTable(data.tableau))
+        .catch((err) => onError(err));
 
 };
 
 const channelListTable = (data) => {
-  if (!data) return;
-  console.log(etat);
-  let tableau;
+    if (!data) return;
+    console.log(etat);
+    let tableau;
 
-  if (etat) {
-    tableau = `
+    if (etat) {
+        tableau = `
     <div class="my-3 p-3 bg-white rounded box-shadow">
-    <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Mes Channels</h6>
     <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
       <label class="btn  btn-primary col-6 active">
         <input type="radio" name="options" id="option1" autocomplete="off" checked data-uri="/">Channel ouvert</label>
@@ -89,10 +85,10 @@ const channelListTable = (data) => {
     </div>
   
   `;
-  } else {
-    tableau = `
+    } else {
+        tableau = `
       <div class="my-3 p-3 bg-white rounded box-shadow">
-      <h6 class="border-bottom border-gray pb-2 mb-0">Page de suppression de Channel</h6>
+      <h6 class="border-bottom border-gray pb-2 mb-0">Mes Channels</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
         <label class="btn  btn-secondary  col-6 active">
           <input type="radio" name="options" id="option1" autocomplete="off" >Channel ouvert</label>
@@ -102,9 +98,9 @@ const channelListTable = (data) => {
       </div>
     `;
 
-  }
+    }
 
-  tableau += `
+    tableau += `
   <table class="table table-hover">
         <thead>
           <tr class="bg-primary">
@@ -119,9 +115,9 @@ const channelListTable = (data) => {
   `;
 
 
-  data.forEach((element) => {
-    if (element.state == "ouvert" && etat) {
-      tableau += `
+    data.forEach((element) => {
+        if (element.state == "ouvert" && etat) {
+            tableau += `
     <tr data-id="${element.id}">
         
           <th scope="row">${element.id}</th>
@@ -131,8 +127,8 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
           <td><button class="btn btn-dark delete">Delete</button></td>
     </tr> `;
-    } else if (element.state == "ferme" && !etat) {
-      tableau += `
+        } else if (element.state == "ferme" && !etat) {
+            tableau += `
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
@@ -141,86 +137,82 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
           <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
     </tr> `;
-    }
-  });
+        }
+    });
 
 
 
 
-  tableau += ` </tbody>
+    tableau += ` </tbody>
       </table>
       </div>
   `;
 
-  document.querySelector("#tableau").innerHTML = tableau;
+    document.querySelector("#tableau").innerHTML = tableau;
 
 
 
-  const deleteBtns = document.querySelectorAll(".delete");
+    const deleteBtns = document.querySelectorAll(".delete");
 
-  deleteBtns.forEach((deleteBtn) => {
-    console.log('deletebouton nombre ' + deleteBtns);
-    deleteBtn.addEventListener("click", onDelete);
-  });
+    deleteBtns.forEach((deleteBtn) => {
+        console.log('deletebouton nombre ' + deleteBtns);
+        deleteBtn.addEventListener("click", onDelete);
+    });
 
 
-  let btnOpen = document.getElementById("option1");
-  let btnClose = document.getElementById("option2");
-  btnOpen.onclick = function () {
-    console.log("oopen");
-    inverseState(true);
-    channelList();
-  };
-  btnClose.onclick = function () {
-    console.log("cloose");
-    inverseState(false);
-    channelList();
-  };
+    let btnOpen = document.getElementById("option1");
+    let btnClose = document.getElementById("option2");
+    btnOpen.onclick = function() {
+        console.log("oopen");
+        inverseState(true);
+        channelList();
+    };
+    btnClose.onclick = function() {
+        console.log("cloose");
+        inverseState(false);
+        channelList();
+    };
 
 };
 
 const onDelete = (e) => {
-  // the id is given in the current table row under data-id attribute
-  console.log('dans le onDelete');
-  const channelid = e.target.parentElement.parentElement.dataset.id;
-  const user = getUserSessionData();
-  fetch(API_URL + "/channel/" + channelid, {
-    method: "DELETE",
-    headers: {
-      Authorization: user.token,
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    })
-    .then((data) => DelChannelPage())
-    .catch((err) => onError(err));
+    // the id is given in the current table row under data-id attribute
+    console.log('dans le onDelete');
+    const channelid = e.target.parentElement.parentElement.dataset.id;
+    const user = getUserSessionData();
+    fetch(API_URL + "/channel/" + channelid, {
+            method: "DELETE",
+            headers: {
+                Authorization: user.token,
+            },
+        })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error(
+                    "Error code : " + response.status + " : " + response.statusText
+                );
+            return response.json();
+        })
+        .then((data) => DelChannelPage())
+        .catch((err) => onError(err));
 };
 
 const onError = (err) => {
-  console.error("DelChannelPage::onError:", err);
-  let errorMessage = "Error";
-  if (err.message) {
-    if (err.message.includes("401"))
-      errorMessage =
-        "The site has a little problem.";
-    else errorMessage = err.message;
-  }
+    console.error("DelChannelPage::onError:", err);
+    let errorMessage = "Error";
+    if (err.message) {
+        if (err.message.includes("401"))
+            errorMessage =
+            "The site has a little problem.";
+        else errorMessage = err.message;
+    }
 };
 
 function inverseState(state) {
-  etat = state;
+    etat = state;
 };
 
 
 
 
 export default DelChannelPage;
-
-
-
-

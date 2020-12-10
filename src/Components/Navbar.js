@@ -1,13 +1,15 @@
 let navBar = document.querySelector("#navBar");
 import { getUserSessionData } from "../utils/session.js";
 import MyImage from "../images/logo.png";
+import { RedirectUrl } from "./Router";
+
 // destructuring assignment
 const Navbar = () => {
     let navbar;
     let user = getUserSessionData();
     if (!user) { // pas connecte
         navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-      <a data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
+      <a id ="logo" data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
         
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
     
@@ -28,7 +30,7 @@ const Navbar = () => {
   </nav>`;
     } else { //connecte
         navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-        <a data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
+        <a id ="logo" data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
 
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
@@ -55,8 +57,10 @@ const Navbar = () => {
   </div>    
   </nav>`;
     }
+    navBar.innerHTML = navbar
+    let logo = document.getElementById("logo");
 
-    return (navBar.innerHTML = navbar);
+    logo.addEventListener("click", function() { RedirectUrl("/"); })
 };
 
 export default Navbar;
