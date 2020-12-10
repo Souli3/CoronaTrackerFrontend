@@ -57,6 +57,7 @@ const channelList = () => {
     body: JSON.stringify(user), // body data type must match "Content-Type" header
     headers: {
       "Content-Type": "application/json",
+      Authorization: user.token,
     },
   })
     .then((response) => {
@@ -206,7 +207,7 @@ const onError = (err) => {
   if (err.message) {
     if (err.message.includes("401"))
       errorMessage =
-        "Site has a little problem.";
+        "The site has a little problem.";
     else errorMessage = err.message;
   }
 };
