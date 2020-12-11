@@ -158,14 +158,14 @@ const usercontainer = (data) => {
                                                   <div class="col-md-6">  </div>
                                                   <div class="col-md-6">
                                                   <label>Prenom : </label>
-                                                  <input type="text" id="fname" class="input-xlarge">
+                                                  <input type="text" id="fname" class="input-xlarge" required>
                                                   </div>
                                               </div>
                                               <div class="row">
                                                   <div class="col-md-6"> </div>
                                                   <div class="col-md-6">
                                                   <label>Nom : </label>
-                                                  <input type="text"  id="name"class="input-xlarge">
+                                                  <input type="text"  id="name" class="input-xlarge" required>
                                                   </div>
                                               </div>
                                               <div class="row">

@@ -7,7 +7,7 @@ import HomePage from "./HomePage.js";
 
 import ChannelAdd from "./AddChannel.js";
 
-import MyChannels from "./MyChannels.js";
+import MyChannelsPage from "./MyChannelsPage.js";
 import DeleteAccount from "./DeleteAccount.js";
 
 import Search from "./Search.js";
@@ -24,7 +24,7 @@ const routes = {
     "/logout": LogoutComponent,
     "/addChannel": ChannelAdd,
     "/error": ErrorPage,
-    "/mychannels": MyChannels,
+    "/mychannels": MyChannelsPage,
     "/deleteaccount": DeleteAccount,
     "/search": Search,
     "/myaccount": MyAccountPage
