@@ -59,10 +59,13 @@ const usercontainer = (data) => {
                         <div class="profile-head">
                                     <h5>${data[0].fname} ${data[0].name}</h5>
                                     <h6>Membre</h6>
-                                    
-                                <button id="edit" type="button" class="btn btn-secondary">Modifier</button>
-                                <button id="deleteacc" type="button" class="btn btn-danger">Delete Account</button>
-                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <span id="messageBoard"></span>
+                                  <div id="buttonsdiv">   
+                                    <button id="edit" type="button" class="btn btn-secondary">Modifier</button>
+
+                                    <button id="deleteacc" type="button" class="btn btn-danger">Delete Account</button>
+                                </div>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item"><br>
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Mes infos</a>
                                 </li>
@@ -120,7 +123,17 @@ const usercontainer = (data) => {
     document.querySelector("#user").innerHTML = userdata;
 
     let deleteBtn = document.getElementById("deleteacc");
-    deleteBtn.addEventListener("click", function() { RedirectUrl("/deleteaccount"); })
+    let buttonsdiv = document.getElementById('buttonsdiv');
+
+    deleteBtn.addEventListener("click", function() {
+        buttonsdiv.innerHTML = `<button id="edit" type="button" class="btn btn-secondary">Modifier</button>
+
+    <button id="confirmation" type="button" class="btn btn-danger">Confirmer la suppression ?</button>`;
+
+        let confirmationButton = document.getElementById("confirmation");
+        confirmationButton.addEventListener("click", function() { RedirectUrl("/deleteaccount"); });
+
+    })
 
     let modifyBtn = document.getElementById("edit");
     modifyBtn.addEventListener("click", function() {
@@ -139,8 +152,8 @@ const usercontainer = (data) => {
                               <div class="profile-head">
                                           <h5>${data[0].fname} ${data[0].name}</h5>
                                           <h6>Membre</h6>
-                                          <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
-                                           
+                                          <span id="messageBoard"></span>
+                                            
                                   <ul class="nav nav-tabs" id="myTab" role="tablist">
                                       <li class="nav-item"><br>
                                           <a class="nav-link active"  aria-selected="true">Veuillez entrer vos infos</a>
@@ -148,7 +161,6 @@ const usercontainer = (data) => {
                                   </ul>
                               </div>
                           </div>
-      
                       </div>
                       <div class="row">
                           <div class="col-md-8">
@@ -158,14 +170,14 @@ const usercontainer = (data) => {
                                                   <div class="col-md-6">  </div>
                                                   <div class="col-md-6">
                                                   <label>Prenom : </label>
-                                                  <input type="text" id="fname" class="input-xlarge" required>
+                                                  <input type="text" id="fname" class="input-xlarge" required="" pattern="^([a-zA-Z]|\s)*$">
                                                   </div>
                                               </div>
                                               <div class="row">
                                                   <div class="col-md-6"> </div>
                                                   <div class="col-md-6">
-                                                  <label>Nom : </label>
-                                                  <input type="text"  id="name" class="input-xlarge" required>
+                                                  <label>  Nom : </label>
+                                                  <input type="text"  id="name" class="input-xlarge" required="" pattern="^([a-zA-Z]|\s)*$">
                                                   </div>
                                               </div>
                                               <div class="row">
@@ -189,12 +201,20 @@ const usercontainer = (data) => {
 
     })
 
-
-
 };
 
+
 const onUpdateUser = (e) => {
+    console.log("dans OnUpdateuser");
     e.preventDefault();
+    let fname = document.getElementById("fname").value;
+    let name = document.getElementById("name").value;
+
+    if (!fname || !name || !fname.match("^([a-zA-Z]|\s)*$") || !name.match("^([a-zA-Z]|\s)*$")) {
+        document.getElementById("messageBoard").innerHTML = `Formulaire vide ou presence d'espaces.`
+        return;
+    }
+
     let newData = {
         fname: document.getElementById("fname").value,
         name: document.getElementById("name").value,

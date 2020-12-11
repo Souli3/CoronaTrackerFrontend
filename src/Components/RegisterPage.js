@@ -42,7 +42,7 @@ let registerPage = `
   <label for="confpassword">Confirmez le mot de passe</label>
   <input class="form-control" id="confpassword" type="password" name="password" placeholder="Confirmez votre Mot De Passe" required="" pattern=".*[A-Z]+.*" />
 </div>
-<button class="btn btn-primary" id="btn" type="submit">Submit</button>
+<button class="btn btn-success" id="btn" type="submit">Submit</button>
 <!-- Create an alert component with bootstrap that is not displayed by default-->
 <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div><span id="errorMessage"></span>
 </form>
