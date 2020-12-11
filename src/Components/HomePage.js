@@ -18,17 +18,26 @@ const HomePage = () => {
 
     document.getElementById('main').innerHTML=`
     <div id="page">
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-                <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-                
-                <div id="board"></div>
-              </div>
+    <div class="">
+    <div id="tab" class="my-3 p-3 bg-white rounded box-shadow row justify-content-xl-center board">
+      <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+      
+      <div col col-xl-auto id="board"></div>
+    </div>
               <div id="searchBar"></div>
                <div id="tableau"></div>
         </div>
-
-       
-    `;
+    
+  </div>
+        
+        <div id="tableau"></div>
+          
+            
+              
+                
+  
+  </html>
+   `;
 
 
     console.log("homepage");
@@ -90,7 +99,7 @@ const channelListTable = (data) => {
   
   `;
     } else {
-        tableau = `
+        tableau = `<br><br><br>
       <div class="my-3 p-3 bg-white rounded box-shadow">
       <h6 class="border-bottom border-gray pb-2 mb-0">Fil d'actualite</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
@@ -147,10 +156,6 @@ const channelListTable = (data) => {
           <td>${element.state}</td>
 
           <td><input type="button" class="btn btn-outline-success plus"  value="voirPlus"></td>`
-
-          if(getUserSessionData()&&element.user==getUserSessionData().username){
-            tableau+= `<td><input type="button" class="btn btn-outline-success update"  value="Update"></td>
-            `;}
             tableau+= `</tr> `;
       
     }
