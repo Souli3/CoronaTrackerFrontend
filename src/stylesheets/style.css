@@ -8,6 +8,21 @@ a {
 }
 
 
+
+.succes{
+    display: flex;
+    letter-spacing: 10px;
+   color: #ffffff;
+}
+.chargementText{
+    color: #ffffff;
+}
+
+
+
+
+
+
 /* CSS to deal with constraint validation styles */
 
 input:invalid {

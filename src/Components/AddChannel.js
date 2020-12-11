@@ -2,6 +2,7 @@
 import { getUserSessionData } from "../utils/session";
 import { RedirectUrl } from "./Router";
 import { API_URL } from "../utils/server";
+import Succes from "./Succes";
 
 
 
@@ -10,7 +11,6 @@ const AddChannel = ()=>{
     //console.log("test 1 et 2 et 3");
     //let page = document.querySelector("page");
     page.innerHTML = `
-    <main class="container p-5" role="main">
    
     <h1 class="mt-5">Cree un channel</h1>
     <form>
@@ -38,7 +38,6 @@ const AddChannel = ()=>{
     </form>
   
   
-  </main>
     `;
 
 
@@ -68,7 +67,7 @@ const onAddChannel = (e) =>{
     };
     fetch(API_URL+"channel/add", {
             
-        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        method: "PUT", // *GET, POST, PUT, DELETE, etc.
         body: JSON.stringify(channel), // body data type must match "Content-Type" header
         headers: {
           "Content-Type": "application/json",
@@ -102,7 +101,9 @@ const onError = (err) => {
 };
 
 const onChannelAdded = (data) => {
-    RedirectUrl("/");
+  console.log("p1")
+  Succes();  
+  //RedirectUrl("/");
 };
 
 

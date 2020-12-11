@@ -1,11 +1,11 @@
-"use strict"
+"use strict";
 import creatBorad from "./Dashboard.js";
 import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import ChannelPage from "./ChannelPage.js"
 import UpdateChannel from "./UpdateChannel.js";
 import { getUserSessionData } from "../utils/session.js";
-import Search from "./Search.js";
+let SearchBar= require("./SearchBar.js");
 
 
 //import {ChannelList} from "./Channel/ChannelList.js";
@@ -13,64 +13,30 @@ import Search from "./Search.js";
 //import Channel from "./Channel/ChannelList";
 var user = getUserSessionData();
 var etat = false;
+let searchBar;
 const HomePage = () => {
-    console.log("homepage");
-    let homepage = `
-  
-      
-  
-      <main role="main" class="container p-5">
-        <div class="d-flex p-5 bg-purple rounded align-items-center">
-          
-            <input class="form-control" id="titre" col-8" type="text" placeholder="Entrez votre recherche" aria-label="Search">
-  
-  
-            <div class="p-2">
-              
-              <select class="custom-select" id="region" required>
-                <option selected disabled value="">Bruxelles</option>
-                <option>*</option>
-                <option>Bruxelles</option>
-                <option>Anvers</option>
-                <option>Liege</option>
-                <option>Mons</option>
-                <option>Namur</option>
-                <option>Gand</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid state.
+
+    document.getElementById('main').innerHTML=`
+    <div id="page">
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+                <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
+                
+                <div id="board"></div>
               </div>
-            </div>
-  
-  
-  
-            <button id="rechercher" class="btn btn-outline-success " >Rechercher</button>
-          
+              <div id="searchBar"></div>
+               <div id="tableau"></div>
         </div>
-  
-        <div class="my-3 p-3 bg-white rounded box-shadow">
-          <h6 class="border-bottom border-gray pb-2 mb-0">Recent updates</h6>
-          
-          <div id="board"></div>
-        </div>
-  
-        
-        <div id="tableau"></div>
-          
-            
-              
-            
-      </main>
-    
-  
-  </html>
-   `;
+
+       
+    `;
 
 
-    page.innerHTML = homepage;
+    console.log("homepage");
+    creatBorad();
+    searchBar = new SearchBar();
     channelList();
 
-    creatBorad();
+    
 };
 
 const channelList = () => {

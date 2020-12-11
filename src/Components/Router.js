@@ -10,12 +10,11 @@ import ChannelAdd from "./AddChannel.js";
 import MyChannelsPage from "./MyChannelsPage.js";
 import DeleteAccount from "./DeleteAccount.js";
 
-import Search from "./Search.js";
 
 import MyAccountPage from "./MyAccountPage.js";
 
-
-
+console.log("reset");
+document.getElementById('page').innerText='';
 const routes = {
     "/": HomePage,
     "/list": UserListPage,
@@ -26,7 +25,6 @@ const routes = {
     "/error": ErrorPage,
     "/mychannels": MyChannelsPage,
     "/deleteaccount": DeleteAccount,
-    "/search": Search,
     "/myaccount": MyAccountPage
 };
 
