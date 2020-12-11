@@ -1,11 +1,8 @@
 "use strict";
-
-import { setLayout } from "../utils/render";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
 import { RedirectUrl } from "./Router";
 
-var etat = false;
 const myAccountPage = () => {
     console.log("MyAccountPage");
     let accountpage = `<main role="main" class="container p-5">
@@ -23,8 +20,6 @@ const myAccountPage = () => {
 };
 
 const userObj = () => {
-
-    setLayout("My Account Page");
 
     const user = getUserSessionData();
 
@@ -123,21 +118,116 @@ const usercontainer = (data) => {
     userdata += ` </div>`;
 
     document.querySelector("#user").innerHTML = userdata;
+
     let deleteBtn = document.getElementById("deleteacc");
     deleteBtn.addEventListener("click", function() { RedirectUrl("/deleteaccount"); })
+
+    let modifyBtn = document.getElementById("edit");
+    modifyBtn.addEventListener("click", function() {
+
+        let updateUserData = `<br><br><br><br>
+        <div class="container emp-profile">
+                  <form method="put">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <div class="profile-img">
+                                  <img src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" alt="Image utilisateur" style=" width: 40%;
+                                  height: 100%;"/>
+                              </div>
+                          </div>
+                          <div class="col-md-8">
+                              <div class="profile-head">
+                                          <h5>${data[0].fname} ${data[0].name}</h5>
+                                          <h6>Membre</h6>
+                                          <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
+                                           
+                                  <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                      <li class="nav-item"><br>
+                                          <a class="nav-link active"  aria-selected="true">Veuillez entrer vos infos</a>
+                                      </li>
+                                  </ul>
+                              </div>
+                          </div>
+      
+                      </div>
+                      <div class="row">
+                          <div class="col-md-8">
+                              <div class="tab-content profile-tab" id="myTabContent">
+                                  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                              <div class="row">
+                                                  <div class="col-md-6">  </div>
+                                                  <div class="col-md-6">
+                                                  <label>Prenom : </label>
+                                                  <input type="text" id="fname" class="input-xlarge">
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-md-6"> </div>
+                                                  <div class="col-md-6">
+                                                  <label>Nom : </label>
+                                                  <input type="text"  id="name"class="input-xlarge">
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                <div class="col-md-6"> </div>
+                                                <button id="update" class="btn btn-primary">Update</button>
+                                              </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </form>           
+              </div>
+              `
+        updateUserData += ` </div>`;
+
+
+        document.querySelector("#user").innerHTML = updateUserData;
+
+        document.getElementById("update").addEventListener("click", onUpdateUser);
+
+    })
+
 
 
 };
 
+const onUpdateUser = (e) => {
+    e.preventDefault();
+    let newData = {
+        fname: document.getElementById("fname").value,
+        name: document.getElementById("name").value,
+        username: getUserSessionData().username,
+    };
+
+    const user = getUserSessionData();
+
+    fetch(API_URL + "users", {
+            method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(newData), // body data type must match "Content-Type" header
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: user.token,
+            },
+        })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error("Error code : " + response.status + " : " + response.statusText);
+            return response.json();
+        })
+        .then((data) => RedirectUrl("/myaccount"))
+        .catch((err) => onError(err));
+};
+
+
 const onError = (err) => {
-    console.error("DelChannelPage::onError:", err);
-    let errorMessage = "Error";
-    if (err.message) {
-        if (err.message.includes("401"))
-            errorMessage =
-            "The site has a little problem.";
-        else errorMessage = err.message;
-    }
+    let messageBoard = document.querySelector("#messageBoard");
+    let errorMessage = "";
+    if (err.message.includes("401")) errorMessage = "There is an error.";
+    else errorMessage = err.message;
+    messageBoard.innerText = errorMessage;
+    messageBoard.classList.add("d-block");
 };
 
 

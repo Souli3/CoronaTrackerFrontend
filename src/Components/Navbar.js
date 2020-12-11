@@ -38,15 +38,14 @@ const Navbar = () => {
           <a class="nav-link" data-uri="/">Accueil <span class="sr-only">(current)</span></a>
         </li>
         
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle"  id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options</a>
-          <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" data-uri="/addChannel">Cree un channel<span class="sr-only">(current)</span></a>
-            <a class="dropdown-item"  data-uri="/delchannel">Mes channels <span class="sr-only">(current)</span></a>
-          </div>
+        <li class="nav-item active">
+          <a class="nav-link" data-uri="/addChannel">Cree un channel<span class="sr-only">(current)</span></a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item active">
+           <a class="nav-link"  data-uri="/mychannels">Mes channels <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
           <a class="nav-link"  data-uri="/myaccount">Mon Compte <span class="sr-only">(current)</span></a>
         </li>
 

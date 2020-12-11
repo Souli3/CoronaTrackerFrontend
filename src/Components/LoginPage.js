@@ -29,10 +29,10 @@ let loginPage = `
                      <label>Password</label>
                      <input class="form-control" id="password" type="password" name="password" placeholder="Enter your password" required="" pattern=".*[A-Z]+.*" />
                   </div>
-                  <button type="submit" id="login" class="btn btn-secondary">Login</button>
+                  <button type="submit" id="login" class="btn btn-success">Login</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
-                  <br><p>Vous n'avez pas de compte?</p>
-                  <button type="button" id="register" class="btn btn-black"  >Register</button>
+                  <br><br><p>Vous n'avez pas de compte?
+                  <button type="button" id="register" class="btn btn-success"  >Register</button></p>
                </form>
             </div>
         </div>
@@ -40,71 +40,69 @@ let loginPage = `
       </div>`;
 
 const LoginPage = () => {
-  let page = document.querySelector("#page");
-  
-  page.innerHTML = loginPage;
+    let page = document.querySelector("#page");
 
-  let loginForm = document.querySelector("form");
-  let registerForm = document.getElementById("register");
- registerForm.addEventListener("click", onRegister);
-  const user = getUserSessionData();
-  if (user) {
-    // re-render the navbar for the authenticated user
-    Navbar();
-    RedirectUrl("/");
-  } else loginForm.addEventListener("submit", onLogin);
+    page.innerHTML = loginPage;
+
+    let loginForm = document.querySelector("form");
+    let registerForm = document.getElementById("register");
+    registerForm.addEventListener("click", onRegister);
+    const user = getUserSessionData();
+    if (user) {
+        // re-render the navbar for the authenticated user
+        Navbar();
+        RedirectUrl("/");
+    } else loginForm.addEventListener("submit", onLogin);
 };
-const onRegister =(e) =>{
-  Navbar();
-  RedirectUrl("/register");
+const onRegister = (e) => {
+    Navbar();
+    RedirectUrl("/register");
 
-  }
+}
 
 const onLogin = (e) => {
-  e.preventDefault();
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
+    e.preventDefault();
 
-  let user = {
-    email: document.getElementById("email").value,
-    password: document.getElementById("password").value,
-  };
+    let user = {
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+    };
 
-  fetch(API_URL + "users/login", {
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    body: JSON.stringify(user), // body data type must match "Content-Type" header
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
-      return response.json();
-    })
-    .then((data) => onUserLogin(data))
-    .catch((err) => onError(err));
+    fetch(API_URL + "users/login", {
+            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            body: JSON.stringify(user), // body data type must match "Content-Type" header
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => {
+            if (!response.ok)
+                throw new Error(
+                    "Error code : " + response.status + " : " + response.statusText
+                );
+            return response.json();
+        })
+        .then((data) => onUserLogin(data))
+        .catch((err) => onError(err));
 };
 
 const onUserLogin = (userData) => {
-  console.log("onUserLogin:", userData);
-  const user = { ...userData, isAutenticated: true };
-  setUserSessionData(user);
-  // re-render the navbar for the authenticated user
-  Navbar();
-  RedirectUrl("/");
+    console.log("onUserLogin:", userData);
+    const user = {...userData, isAutenticated: true };
+    setUserSessionData(user);
+    // re-render the navbar for the authenticated user
+    Navbar();
+    RedirectUrl("/");
 };
 
 const onError = (err) => {
-  let messageBoard = document.querySelector("#messageBoard");
-  let errorMessage = "";
-  if (err.message.includes("401")) errorMessage = "Wrong username or password.";
-  else errorMessage = err.message;
-  messageBoard.innerText = errorMessage;
-  // show the messageBoard div (add relevant Bootstrap class)
-  messageBoard.classList.add("d-block");
+    let messageBoard = document.querySelector("#messageBoard");
+    let errorMessage = "";
+    if (err.message.includes("401")) errorMessage = "Wrong username or password.";
+    else errorMessage = err.message;
+    messageBoard.innerText = errorMessage;
+    // show the messageBoard div (add relevant Bootstrap class)
+    messageBoard.classList.add("d-block");
 };
 
 export default LoginPage;
