@@ -16,7 +16,7 @@ console.log("GET data");
 function make(cont){
  let  board=document.getElementById("board");
  if(board.innerText!='')return
- board.style.width = "1750px";
+ board.style.width = "1450px";
   board.style.height= "350px";
   board.style.border="2px solid";
   
@@ -35,7 +35,7 @@ function make(cont){
     gridTextWeight:570,
     gridTextColor:'white',
     barColors: ['red',' rgb(34, 177, 77)',],
-
+    resize:true,
     lineWidth: '3px',
 })
 
