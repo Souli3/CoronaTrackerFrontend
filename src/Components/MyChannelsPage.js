@@ -1,41 +1,34 @@
 "use strict";
 import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
+let SearchBar= require("./SearchBar.js");
 
 var etat = false;
+let searchBar;
 const MyChannelsPage = () => {
     console.log("MyChannelsPage");
-    let channelspage = `
-      <main role="main" class="container p-5">
-        <div class="d-flex p-5 bg-purple rounded align-items-center">
-          <form class="form-inline  col-12">
-            <input class="form-control col-8" type="text" placeholder="Entrez votre recherche" aria-label="Search">
-  
-  
-            <div class="p-2">
-              
-              <select class="custom-select" id="validationCustom04" required>
-                <option selected disabled value="">Bruxelles</option>
-                <option>Bruxelles</option>
-                <option>Anvers</option>
-                <option>Liege</option>
-                <option>Mons</option>
-                <option>Namur</option>
-                <option>Gand</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid state.
-              </div>
-            </div>
-            <button id="rechercher" class="btn btn-outline-success " type="submit">Rechercher</button>
-          </form>
-        </div>
-        <div id="tableau"></div>
-      </main>
     
+    page.innerHTML=` <div id="page">
+    
+    
+              <div id="searchBar"></div>
+               <div id="tableau"></div>
+        
+    
+  </div>
+        
+        <div id="tableau"></div>
+          
+            
+              
+                
+  
   </html>
-   `;
-    page.innerHTML = channelspage;
+
+  
+</div>`;
+    searchBar = new SearchBar();
+
     channelList();
 
 };

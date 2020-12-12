@@ -7,6 +7,7 @@ import { RedirectUrl } from "./Router";
 const Navbar = () => {
     let navbar;
     let user = getUserSessionData();
+  
     if (!user) { // pas connecte
         navbar = `<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
       <a id ="logo" data-uri="/"><img src="${MyImage}" alt="CoronaTracker logo" style=" width: 90px;height: 90px;"></a>
@@ -49,6 +50,7 @@ const Navbar = () => {
           <a class="nav-link"  data-uri="/logout">Logout <span class="sr-only">(current)</span></a>
         </li>
       </ul>
+      <h4 class="profils">${user.username}<span class="badge badge-danger"></span></h4>
   </div>    
   </nav>`;
     }

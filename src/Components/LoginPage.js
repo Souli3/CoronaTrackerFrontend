@@ -4,6 +4,7 @@ By default, all escape sequences in a template literal are ignored.*/
 import { getUserSessionData, setUserSessionData } from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
 import { API_URL } from "../utils/server.js";
+import Navbar from "./Navbar.js";
 
 let loginPage = `
 <div class="sidenav">
@@ -60,8 +61,8 @@ const onLogin = (e) => {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
     };
-
     fetch(API_URL + "users/login", {
+        
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             body: JSON.stringify(user), // body data type must match "Content-Type" header
             headers: {
@@ -83,6 +84,7 @@ const onUserLogin = (userData) => {
     // console.log("onUserLogin:", userData);
     const user = {...userData, isAutenticated: true };
     setUserSessionData(user);
+    Navbar();
     RedirectUrl("/");
 };
 
