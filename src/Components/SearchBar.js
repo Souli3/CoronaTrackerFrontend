@@ -1,10 +1,20 @@
 "use strict";
 
+const { API_URL } = require("../utils/server");
 
 class SearchBar{
 
     constructor(){
-        console.log("recherche");
+      
+
+
+        getRegionList();
+     
+
+
+
+
+
         let searchBar = `
   
       
@@ -18,15 +28,7 @@ class SearchBar{
               <div class="p-2">
                 
                 <select class="custom-select" id="region" required>
-                  <option selected disabled value="">Bruxelles</option>
-                  <option>*</option>
-                  <option>Bruxelles</option>
-                  <option>Anvers</option>
-                  <option>Liege</option>
-                  <option>Mons</option>
-                  <option>Namur</option>
-                  <option>Gand</option>
-                </select>
+               </select>
                 <div class="invalid-feedback">
                   Please select a valid state.
                 </div>
@@ -34,7 +36,7 @@ class SearchBar{
     
     
     
-              <button id="rechercher" class="btn btn-outline-success " >Rechercher</button>
+              <button id="rechercher" class="btn btn-dark " >Rechercher</button>
             
           </div>
     
@@ -105,61 +107,37 @@ class SearchBar{
 
 }
 
-/*
 
-const onSearch = (e) =>{
-    let titre = document.getElementById("titre").value;
-    if(!titre){
-      titre="*";
-    }
-    let region = document.getElementById("region").value;
-    
- fetch(API_URL + "channel/"+titre+"/"+region, {
+
+
+async function getRegionList() {
+
+ 
+  fetch(API_URL + "region", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-    },
+  },
   })
-    .then((response) => {
+  .then((response) => {
       if (!response.ok)
-        throw new Error(
-          "Error code : " + response.status + " : " + response.statusText
-        );
+          throw new Error(
+              "Error code : " + response.status + " : " + response.statusText
+          );
       return response.json();
-    })
-    .then((data) => channelListTable(data))
-    .catch((err) => onError(err));
+  })
+  .then((data) => ecrire(data.tableau))
+  .catch((err) => onError(err));
 
-    let btnOpen = document.getElementById("option1");
-    let btnClose = document.getElementById("option2");
-    btnOpen.onclick = function() {
-        console.log("oopen");
-        inverseState(true);
-        channelList();
-    };
-    btnClose.onclick = function() {
-        console.log("cloose");
-        inverseState(false);
-        channelList();
-    };
+ 
+  
 
-};
+}
 
+function ecrire(data){
+  data.forEach(element => {
+    document.getElementById("region").innerHTML+=`<option>${element.region}</option>`;
+  });
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-export default searchBarComponents;
-*/
 module.exports=SearchBar;

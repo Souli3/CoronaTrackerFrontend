@@ -12,9 +12,10 @@ let SearchBar= require("./SearchBar.js");
 //import { RedirectUrl } from "./Router.js";
 //import Channel from "./Channel/ChannelList";
 var user = getUserSessionData();
-var etat = false;
+var etat = true;
 let searchBar;
 const HomePage = () => {
+
 
     document.getElementById('main').innerHTML=`
     <div id="page">
@@ -37,6 +38,9 @@ const HomePage = () => {
                 
   
   </html>
+
+  
+</div>
    `;
 
 
@@ -115,6 +119,7 @@ const channelListTable = (data) => {
 
     tableau += `
   <table class="table table-hover">
+  <span class="fi-arrow-circle-top"></span>      
         <thead>
           <tr class="bg-primary">
             <th scope="col">#</th>
@@ -175,7 +180,9 @@ const channelListTable = (data) => {
 
   let btnOpen = document.getElementById("option1");
   let btnClose = document.getElementById("option2");
+
   btnOpen.onclick = function () {
+    //btnOpen.scrollTo(0, btnOpen.offsetHeight * 1.5)
     console.log("oopen");
     inverseState(true);
     channelList();

@@ -4,28 +4,30 @@ import { API_URL } from "../utils/server";
 import Succes from "./Succes";
 
 
-
+let region;
 const AddChannel = () => {
     if (!getUserSessionData()) RedirectUrl("/login");
     //console.log("test 1 et 2 et 3");
     //let page = document.querySelector("page");
-    page.innerHTML = `
+    getRegionList();
+    let addPage = `
    
     <h1 class="mt-5">Cree un channel</h1>
     <form>
+    <div id="error"></div>
     <div class="form-group">
       <label for="exampleFormControlInput1">Titre</label>
       <input id="titre" class="form-control" type="text" placeholder="Entrez un titre">
     </div>
     <div class="form-group">
       <label for="exampleFormControlSelect1">Selectionnez un lieux</label>
-      <select class="form-control" id="region">
-      <option>Bruxelles</option>
-      <option>Anvers</option>
-      <option>Liege</option>
-      <option>Mons</option>
-      <option>Namur</option>
-      <option>Gand</option>
+      <select class="form-control" id="region">`;
+
+     
+        region.forEach(element => {
+            addPage+=`<option>${element.region}</option>`;
+        });
+        addPage+=`
       </select>
     </div>
     
@@ -38,15 +40,31 @@ const AddChannel = () => {
   
   
     `;
-
+    page.innerHTML=addPage;
 
     let btnOpen = document.getElementById("Confirmer");
     btnOpen.onclick = function(e) {
-        console.log("test " + document.getElementById("region").value);
-        console.log("test " + document.getElementById("titre").value);
-        console.log("test " + document.getElementById("sujet").value);
+        let error;
+        if(isEmptyOrSpaces(document.getElementById("titre").value) ){
+              error=  `<div class="alert alert-danger" role="alert">
+                Veuillez rentre un titre
+              </div>`;
 
-        onAddChannel(e);
+        }else if(isEmptyOrSpaces(document.getElementById("sujet").value)){
+            error = `<div class="alert alert-danger" role="alert">
+                Veuillez rentre un sujet
+              </div>`;
+        
+
+        }else if(document.getElementById("region").value=="*"){
+            error = `<div class="alert alert-danger" role="alert">
+            Veuillez choisir un lieu
+          </div>`;
+        } 
+        else{
+            onAddChannel(e);
+        }
+        document.getElementById("error").innerHTML=error;
 
     };
 
@@ -82,7 +100,7 @@ const onAddChannel = (e) => {
         })
         .then((data) => onChannelAdded(data))
         .catch((err) => onError(err));
-
+    
 
 
 
@@ -100,15 +118,39 @@ const onError = (err) => {
 };
 
 const onChannelAdded = (data) => {
-    console.log("p1")
     Succes();
     //RedirectUrl("/");
 };
 
 
+function isEmptyOrSpaces(str){
+    return str === null || str.match(/^ *$/) !== null;
+}
 
+function getRegionList(){
 
-
+  
+    fetch(API_URL + "region", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+    },
+    })
+    .then((response) => {
+        if (!response.ok)
+            throw new Error(
+                "Error code : " + response.status + " : " + response.statusText
+            );
+        return response.json();
+    })
+    .then((data) => region=data.tableau)
+    .catch((err) => onError(err));
+  
+  
+  
+  
+  
+  }
 
 
 
