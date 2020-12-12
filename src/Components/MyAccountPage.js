@@ -58,12 +58,14 @@ const usercontainer = (data) => {
                     <div class="col-md-8">
                         <div class="profile-head">
                                     <h5>${data[0].fname} ${data[0].name}</h5>
-                                    <h6>Membre</h6>
-                                    <span id="messageBoard"></span>
+                                    <h6> Membre  </h6>
+                                    <p id="messageBoard"> </p> 
+                                   
                                   <div id="buttonsdiv">   
                                     <button id="edit" type="button" class="btn btn-secondary">Modifier</button>
 
-                                    <button id="deleteacc" type="button" class="btn btn-danger">Delete Account</button>
+                                    <button id="deleteacc" type="button" class="btn btn-danger">Supprimer compte</button>
+                                    <button id="deletedata" type="button" class="btn btn-danger">Supprimer mes donnees</button>
                                 </div>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item"><br>
@@ -126,17 +128,19 @@ const usercontainer = (data) => {
     let buttonsdiv = document.getElementById('buttonsdiv');
 
     deleteBtn.addEventListener("click", function() {
-        buttonsdiv.innerHTML = `<button id="edit" type="button" class="btn btn-secondary">Modifier</button>
-
-    <button id="confirmation" type="button" class="btn btn-danger">Confirmer la suppression ?</button>`;
-
+        buttonsdiv.innerHTML = `
+    <button id="confirmation" type="button" class="btn btn-danger">Confirmer</button>
+    <button id="abort" type="button" class="btn btn-success">Annuler</button>`
         let confirmationButton = document.getElementById("confirmation");
         confirmationButton.addEventListener("click", function() { RedirectUrl("/deleteaccount"); });
+
+        let abortBtn = document.getElementById('abort');
+        abortBtn.addEventListener("click", function() { RedirectUrl('/myaccount') });
 
     })
 
     let modifyBtn = document.getElementById("edit");
-    modifyBtn.addEventListener("click", function() {
+    modifyBtn.addEventListener("click", function onModify() {
 
         let updateUserData = `<br><br><br><br>
         <div class="container emp-profile">
@@ -200,6 +204,12 @@ const usercontainer = (data) => {
         document.getElementById("update").addEventListener("click", onUpdateUser);
 
     })
+
+    let deletedatabtn = document.getElementById("deletedata");
+    deletedatabtn.addEventListener("click", function() {
+        let msg = document.getElementById("messageBoard");
+        msg.innerHTML = 'Vos donnees ont bien ete supprimes';
+    });
 
 };
 

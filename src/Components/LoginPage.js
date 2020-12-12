@@ -3,7 +3,6 @@ escaped using the escape character \ if they are to be included in their templat
 By default, all escape sequences in a template literal are ignored.*/
 import { getUserSessionData, setUserSessionData } from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
-import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
 
 let loginPage = `
@@ -31,7 +30,7 @@ let loginPage = `
                   </div>
                   <button type="submit" id="login" class="btn btn-success">Login</button>
                   <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div>
-                  <br><br><p>Vous n'avez pas de compte?
+                  <br><br><p><u>Vous n'avez pas de compte?</u>
                   <button type="button" id="register" class="btn btn-success"  >Register</button></p>
                </form>
             </div>
@@ -40,8 +39,6 @@ let loginPage = `
       </div>`;
 
 const LoginPage = () => {
-    let page = document.querySelector("#page");
-
     page.innerHTML = loginPage;
 
     let loginForm = document.querySelector("form");
@@ -49,20 +46,16 @@ const LoginPage = () => {
     registerForm.addEventListener("click", onRegister);
     const user = getUserSessionData();
     if (user) {
-        // re-render the navbar for the authenticated user
-        Navbar();
         RedirectUrl("/");
     } else loginForm.addEventListener("submit", onLogin);
 };
-const onRegister = (e) => {
-    Navbar();
+const onRegister = () => {
     RedirectUrl("/register");
-
 }
 
 const onLogin = (e) => {
-    e.preventDefault();
 
+    e.preventDefault();
     let user = {
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
@@ -87,11 +80,9 @@ const onLogin = (e) => {
 };
 
 const onUserLogin = (userData) => {
-    console.log("onUserLogin:", userData);
+    // console.log("onUserLogin:", userData);
     const user = {...userData, isAutenticated: true };
     setUserSessionData(user);
-    // re-render the navbar for the authenticated user
-    Navbar();
     RedirectUrl("/");
 };
 

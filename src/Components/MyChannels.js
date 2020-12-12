@@ -132,7 +132,7 @@ const channelListTable = (data) => {
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>?</td>
+          <td>${element.region}</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
           <td><button id="delete" class="btn btn-dark delete">Delete</button></td>

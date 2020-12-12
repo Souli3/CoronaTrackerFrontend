@@ -2,7 +2,6 @@
 import { RedirectUrl } from "./Router.js";
 import Navbar from "./Navbar.js";
 import { setUserSessionData } from "../utils/session.js";
-import { API_URL } from "../utils/server.js";
 
 /* In a template literal, the ` (backtick), \ (backslash), and $ (dollar sign) characters should be 
 escaped using the escape character \ if they are to be included in their template value. 
@@ -11,9 +10,9 @@ let registerPage = `
 <div class="sidenav">
          <div class="login-main-text">
             <h1>CoronaTracker</h1><br><br>
-            <h2>Bienvenue</h2>
-            <p> Veuillez  vous inscrire pour acceder au site.</p><br><br><br><br><br><br><br>
-            <p><i>Ce site est un type de forum utilise pour traquer les cas de covid en Belgique...</i><p>
+            <h2>Register Page</h2>
+            <p> Veuillez vous connecter ou vous inscrire pour acceder a toutes les fonctionnalites du site.</p><br><br><br><br><br><br><br>
+            <p><i>Ce site est un blog utilise pour traquer les cas de covid en Belgique.</i><p>
             
             
          </div>
@@ -43,6 +42,10 @@ let registerPage = `
   <input class="form-control" id="confpassword" type="password" name="password" placeholder="Confirmez votre Mot De Passe" required="" pattern=".*[A-Z]+.*" />
 </div>
 <button class="btn btn-success" id="btn" type="submit">Submit</button>
+
+<br><br><p><u>Vous avez deja un compte?</u>
+<button type="button" id="login" class="btn btn-success">Login</button></p>
+
 <!-- Create an alert component with bootstrap that is not displayed by default-->
 <div class="alert alert-danger mt-2 d-none" id="messageBoard"></div><span id="errorMessage"></span>
 </form>
@@ -56,7 +59,13 @@ const RegisterPage = () => {
     page.innerHTML = registerPage;
     let registerForm = document.querySelector("form");
     registerForm.addEventListener("submit", onRegister);
+    let loginButton = document.getElementById("login");
+    loginButton.addEventListener("click", loginOnClick);
 };
+
+const loginOnClick = () => {
+    RedirectUrl("/login");
+}
 
 const onRegister = async(e) => {
     e.preventDefault();

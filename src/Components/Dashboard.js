@@ -16,14 +16,14 @@ console.log("GET data");
 function make(cont){
  let  board=document.getElementById("board");
  if(board.innerText!='')return
- board.style.width = "1720px";
-  board.style.height= "300px";
+ board.style.width = "1750px";
+  board.style.height= "350px";
   board.style.border="2px solid";
   
   new Morris.Bar({
     // ID of the element in which to draw the chart.//
     element: 'board',
-    fillOpacity: 4,
+    fillOpacity: 9,
     data: cont,
     // The name of the data record attribute that contains x-values.
     xkey: `region`,
@@ -31,8 +31,8 @@ function make(cont){
     ykeys: ['ouvert','ferme'],
     // Labels for the ykeys -- will be displayed when you hover over the
     labels: ['Ouvert','Fermé'],
-    gridTextSize:8,
-    gridTextWeight:540,
+    gridTextSize:16,
+    gridTextWeight:570,
     gridTextColor:'white',
     barColors: ['red',' rgb(34, 177, 77)',],
 
