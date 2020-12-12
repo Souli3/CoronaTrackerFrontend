@@ -3,8 +3,8 @@ import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
 
 var etat = false;
-const DelChannelPage = () => {
-    console.log("DelChannelPage");
+const MyChannelsPage = () => {
+    console.log("MyChannelsPage");
     let deletepage = `
 
       <main role="main" class="container p-5">
@@ -91,9 +91,9 @@ const channelListTable = (data) => {
       <h6 class="border-bottom border-gray pb-2 mb-0">Mes Channels</h6>
       <div class="btn-group btn-group-toggle col-12 " data-toggle="buttons">
         <label class="btn  btn-secondary  col-6 active">
-          <input type="radio" name="options" id="option1" autocomplete="off" >Channel ouvert</label>
+          <input type="radio" name="options" id="option1" autocomplete="off" checked>Channel ouvert</label>
         <label class="btn  btn-primary col-6">
-          <input type="radio" name="options" id="option2" autocomplete="off" checked>Channel fermé</label>
+          <input type="radio" name="options" id="option2" autocomplete="off" >Channel fermé</label>
 
       </div>
     `;
@@ -132,16 +132,13 @@ const channelListTable = (data) => {
     <tr data-id="${element.id}">
           <th scope="row">${element.id}</th>
           <td>${element.title}</td>
-          <td>?</td>
+          <td>${element.region}</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
           <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
     </tr> `;
         }
     });
-
-
-
 
     tableau += ` </tbody>
       </table>
@@ -150,15 +147,12 @@ const channelListTable = (data) => {
 
     document.querySelector("#tableau").innerHTML = tableau;
 
-
-
     const deleteBtns = document.querySelectorAll(".delete");
 
     deleteBtns.forEach((deleteBtn) => {
         console.log('deletebouton nombre ' + deleteBtns);
         deleteBtn.addEventListener("click", onDelete);
     });
-
 
     let btnOpen = document.getElementById("option1");
     let btnClose = document.getElementById("option2");
@@ -193,7 +187,7 @@ const onDelete = (e) => {
                 );
             return response.json();
         })
-        .then((data) => DelChannelPage())
+        .then((data) => MyChannelsPage())
         .catch((err) => onError(err));
 };
 
@@ -215,4 +209,4 @@ function inverseState(state) {
 
 
 
-export default DelChannelPage;
+export default MyChannelsPage;

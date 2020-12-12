@@ -23,9 +23,11 @@ var html=(id,title,sujet,date,etat,region,user)=>{
 <ul id="message"></ul>
 <div class="msj-rta macro">                        
                     <div class="text text-r" style="background:whitesmoke !important">
-                        <input id="text-message" placeholder="Type a message"/>
+                    
+                        <textarea id="text-message" placeholder="Type a message"/></textarea>
+                        <button data-id="${id}" id="sendMessage" class="btn btn-outline-success "><i> &#xe092;</i></button>
                     </div> 
-                    <button data-id="${id}" id="sendMessage" class="btn btn-outline-success " >Send</button>
+                    
                 </div>
                 `
 };
@@ -41,13 +43,6 @@ let ChannelPage=(id)=>{
       })
       .then((data) => (page.innerHTML=html(data.channel.id,data.channel.title,data.channel.subject,data.channel.date,data.channel.state,data.channel.region,data.channel.user)))
       .then(()=>{(document.getElementById('sendMessage')).addEventListener('click',send)}).then(()=>{listMessages(id)})
-      // .then(()=>{insertChat("me", "Hello Tom...", 0);  
-      // insertChat("you", "Hi, Pablo", 1500);
-      // insertChat("me", "What would you like to talk about today?", 3500);
-      // insertChat("you", "Tell me a joke",7000);
-      // insertChat("me", "Spaceman: Computer! Computer! Do we bring battery?!", 9500);
-      // insertChat("you", "LOL", 12000);
-      // })
       .catch((err) => onError(err));
       
     }
