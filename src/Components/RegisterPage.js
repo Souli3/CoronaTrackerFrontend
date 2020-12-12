@@ -22,6 +22,11 @@ let registerPage = `
          <div class="col-md-6 col-sm-12">
 <div class="register-form"><form>
 <div class="form-group"><br><br><br><br>
+<label for="firstName">Pseudo</label>
+  <input class="form-control" id="pseudo" type="text" name="pseudo" placeholder="Entrez votre Pseudo " required="" pattern="^([a-zA-Z]|\s)*$"
+  />
+</div>
+ <div class="form-group">
   <label for="firstName">Prénom</label>
   <input class="form-control" id="fname" type="text" name="fname" placeholder="Entrez votre Prénom " required="" pattern="^([a-zA-Z]|\s)*$"
   />
@@ -61,6 +66,7 @@ const RegisterPage = () => {
 const onRegister = async(e) => {
     e.preventDefault();
     let user = {
+        pseudo: document.getElementById("pseudo").value,
         fname: document.getElementById("fname").value,
         name: document.getElementById("name").value,
         email: document.getElementById("email").value,
