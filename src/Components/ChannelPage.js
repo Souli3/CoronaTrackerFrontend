@@ -60,7 +60,6 @@ let ChannelPage=(id)=>{
       var message=document.getElementById('text-message').value;
       let user=getUserSessionData().username;
       let idChannel= e.target.dataset.id;
-      console.log("verify id channel "+idChannel+" message : "+ message+" by User :"+user);
       fetch(API_URL+"channel/addMessage",{
         method: "PUT", 
         body: JSON.stringify({user,message,idChannel}), 
