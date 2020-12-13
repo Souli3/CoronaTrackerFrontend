@@ -5,7 +5,7 @@ import { getUserSessionData, removeSessionData } from "../utils/session.js";
 import { RedirectUrl } from "./Router.js";
 import Navbar from "./Navbar.js";
 import { API_URL } from "../utils/server.js";
-
+import Succes from "./Succes";
 
  const deleteAccount = () => {
   let user = getUserSessionData();
@@ -25,7 +25,8 @@ const onUserLogout = () => {
     removeSessionData();
     // re-render the navbar for a non-authenticated user
     Navbar();
-    RedirectUrl("/");
+    Succes();
+    //RedirectUrl("/");
 
 };
 

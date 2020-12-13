@@ -3,7 +3,7 @@ import { API_URL } from "../utils/server";
 import { getUserSessionData } from "../utils/session.js";
 let SearchBar= require("./SearchBar.js");
 
-var etat = false;
+var etat = true;
 let searchBar;
 const MyChannelsPage = () => {
     console.log("MyChannelsPage");
@@ -145,6 +145,46 @@ const channelListTable = (data) => {
         deleteBtn.addEventListener("click", onDelete);
     });
 
+
+    let btnOpen = document.getElementById("option1");
+    let btnClose = document.getElementById("option2");
+    btnOpen.onclick = function() {
+        console.log("oopen");
+        inverseState(true);
+        channelList();
+    };
+    btnClose.onclick = function() {
+        console.log("cloose");
+        inverseState(false);
+        channelList();
+    };
+    document.getElementById("rechercher").onclick = function (e){
+        onSearch(e);
+      };
+
+};
+const onSearch = (e) =>{
+    let titre = document.getElementById("titre").value;
+    if(!titre){
+      titre="*";
+    }
+    let region = document.getElementById("region").value;
+    
+ fetch(API_URL + "channel/"+titre+"/"+region, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(
+          "Error code : " + response.status + " : " + response.statusText
+        );
+      return response.json();
+    })
+    .then((data) => channelListTable(data))
+    .catch((err) => onError(err));
 
     let btnOpen = document.getElementById("option1");
     let btnClose = document.getElementById("option2");
