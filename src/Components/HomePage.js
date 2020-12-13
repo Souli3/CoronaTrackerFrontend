@@ -172,7 +172,7 @@ const channelListTable = (data) => {
 
       </table>
       </div>
-      <div width:"60"></div>
+      <div class="footer"></div>
   `;
 
     document.querySelector("#tableau").innerHTML = tableau;
