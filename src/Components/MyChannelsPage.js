@@ -113,7 +113,7 @@ const channelListTable = (data) => {
           <td>${element.region}</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button class="btn btn-dark delete">Delete</button></td>
+          <td><button class="btn btn-danger delete">Delete</button></td>
     </tr> `;
         } else if (element.state == "ferme" && !etat) {
             tableau += `
@@ -123,7 +123,7 @@ const channelListTable = (data) => {
           <td>?</td>
           <td>${element.date}</td>
           <td>${element.state}</td>
-          <td><button id="delete" class="btn btn-dark delete">Delete</button></td>
+          <td><button id="delete" class="btn btn-danger delete">Delete</button></td>
     </tr> `;
         }
     });
