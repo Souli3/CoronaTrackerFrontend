@@ -62,7 +62,7 @@ let ChannelPage=(id)=>{
       let idChannel= e.target.dataset.id;
       console.log("verify id channel "+idChannel+" message : "+ message+" by User :"+user);
       fetch(API_URL+"channel/addMessage",{
-        method: "POST", 
+        method: "PUT", 
         body: JSON.stringify({user,message,idChannel}), 
         headers: {
             "Content-Type": "application/json",

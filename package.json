@@ -10,6 +10,8 @@
   "dependencies": {
     "animejs": "^3.2.1",
     "bootstrap": "^4.5.2",
+    "cookie-consent-box": "^2.4.0",
+    "cookies-utils": "^1.0.0",
     "jquery": "^3.5.1",
     "morris": "^0.1.4",
     "nodemon": "^2.0.6",

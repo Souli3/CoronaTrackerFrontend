@@ -5,6 +5,9 @@ import { API_URL } from "../utils/server";
 import ChannelPage from "./ChannelPage.js"
 import UpdateChannel from "./UpdateChannel.js";
 import { getUserSessionData } from "../utils/session.js";
+import creatCookies from "./Cookies.js";
+ 
+
 let SearchBar= require("./SearchBar.js");
 
 
@@ -35,12 +38,7 @@ const HomePage = () => {
           
             
               
-                
-  
-  </html>
-
-  
-</div>
+            
    `;
 
 
@@ -48,8 +46,8 @@ const HomePage = () => {
     creatBorad();
     searchBar = new SearchBar();
     channelList();
-
-    
+    console.log(document.cookie);
+     creatCookies();
 };
 
 const channelList = () => {
