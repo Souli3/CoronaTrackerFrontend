@@ -12,7 +12,7 @@ let loginPage = `
             <h1>CoronaTracker</h1><br><br>
             <h2>Login Page</h2>
             <p>Veuillez vous connecter ou vous inscrire pour acceder a toutes les fonctionnalites du site.</p><br><br><br><br><br><br><br>
-            <p><i>Ce site est un blog utilise pour tracer les cas de covid en Belgique.</i><p>
+            <p><i>Ce site est un blog utilise pour traquer les cas de covid en Belgique.</i><p>
             
             
          </div>
